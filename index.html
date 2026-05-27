@@ -6,6 +6,11 @@
 
 <title>早餐食材優惠活動｜限時搶購</title>
 
+<meta property="og:title" content="早餐食材優惠活動｜限時搶購">
+<meta property="og:description" content="門市取貨 / 全家配送・超方便">
+<meta property="og:image" content="https://freshbreakfast.github.io/DM-order/image1.png?v=3">
+<meta property="og:url" content="https://freshbreakfast.github.io/DM-order/?v=3">
+
 <style>
 body {
     margin: 0;
@@ -14,6 +19,23 @@ body {
     background: #111;
 }
 
+/* 動畫 */
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* 圖片 */
 img {
     width: 100%;
     max-width: 600px;
@@ -21,8 +43,9 @@ img {
     margin: 0 auto;
 }
 
+/* 按鈕 */
 .buttons {
-    margin: 25px 0;
+    margin: 25px 0 30px;
 }
 
 .btn {
@@ -36,102 +59,142 @@ img {
 }
 
 .store {
-    background-color: #06C755;
-    color: white;
+    background:#06C755;
+    color:white;
 }
 
 .online {
-    background-color: #ffffff;
-    color: #111;
+    background:#fff;
+    color:#111;
+    border:1px solid #ddd;
 }
 
+/* 🔥 信任感 */
+.trust {
+    color:#ccc;
+    font-size:13px;
+    margin-top:10px;
+}
+
+/* 🔥 套組區 */
 .bundle {
     background:#fff;
     color:#111;
-    padding:20px;
-    margin:20px auto;
-    max-width:600px;
-    border-radius:12px;
+    padding:25px 15px;
 }
 
+.bundle h2 {
+    margin-bottom:15px;
+}
+
+.card {
+    background:#f7f7f7;
+    border-radius:12px;
+    padding:15px;
+    margin:15px auto;
+    max-width:500px;
+}
+
+/* LINE按鈕 */
 .lineBtn {
+    display:block;
     background:#06C755;
     color:#fff;
-    padding:12px;
-    display:block;
-    margin-top:10px;
-    border-radius:8px;
+    padding:14px;
+    margin-top:12px;
+    border-radius:999px;
     text-decoration:none;
+    font-weight:bold;
+}
+
+.lineBtn:hover {
+    opacity:0.9;
+}
+
+/* 手機 */
+@media (max-width:768px){
+    .btn {
+        display:block;
+        width:80%;
+        margin:12px auto;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 原本標題（完全不動） -->
-<div style="background:#000; padding:24px 10px;">
-  <h1 style="margin:0; font-size:22px; line-height:1.5;">
-    🔥 限時搶購<br>
-    早餐食材優惠活動
-  </h1>
+<!-- 標題 -->
+<div style="background:#000; padding:24px 10px; animation: slideDown 0.8s;">
+<h1 style="margin:0; font-size:22px;">
+<span style="color:#ff4d4f; animation:flash 1.2s infinite;">
+🔥 限時搶購
+</span><br>
+<span style="color:#fff;">
+早餐食材優惠活動
+</span>
+</h1>
 
-  <p style="margin:12px 0 0; font-size:14px; color:#ccc;">
-    門市取貨 / 全家配送・超方便 🚚
-  </p>
+<p style="margin:12px 0 0; font-size:14px;">
+<span style="color:#ffd700;">門市取貨</span>
+<span style="color:#888;"> / </span>
+<span style="color:#ffd700;">全家配送</span>
+<span style="color:#ccc;">・超方便</span>
+<span style="display:inline-block; animation:bounce 1s infinite;">🚚</span>
+</p>
 </div>
 
-<!-- 第1頁 -->
-<img src="https://freshbreakfast.github.io/DM-order/image1.png?v=3">
+<!-- 圖片 -->
+<img src="https://freshbreakfast.github.io/order/image1.png?v=3">
+<img src="https://freshbreakfast.github.io/order/image4.png?v=3">
+<img src="https://freshbreakfast.github.io/order/image5.png?v=3">
+<img src="https://freshbreakfast.github.io/order/image6.png?v=3">
 
-<!-- 第2頁 -->
-<img src="https://freshbreakfast.github.io/DM-order/image4.png?v=3">
-
-<!-- ✅ CTA（只在第2頁下面） -->
-<div class="buttons">
-
-<a href="https://freshbreakfast.github.io/order-group/" class="btn store">
-🔥 馬上搶！門市取貨
-</a>
-
-<a href="https://famistore.famiport.com.tw/users/2903801" class="btn online">
-🚚 直接送到店！全家配送
-</a>
-
-</div>
-
-<!-- 信任感 -->
-<p style="color:#ccc; font-size:13px;">
-✔ 早餐店老闆指定使用  
-✔ 團購熱銷中  
-✔ 冷凍配送安心保存
+<p style="color:#ff4d4f; font-size:13px;">
+⏰ 熱銷中，部分商品可能提前完售
 </p>
 
-<!-- 第3頁 -->
-<img src="https://freshbreakfast.github.io/DM-order/image5.png?v=3">
+<!-- 按鈕 -->
+<div class="buttons">
 
-<!-- ✅ 第4頁（你剛剛沒顯示） -->
-<img src="https://freshbreakfast.github.io/DM-order/image6.png?v=1">
+<a href="https://freshbreakfast.github.io/order-group/" target="_blank" class="btn store">
+👉 立即搶購→門市取貨
+</a>
 
-<!-- 🔥 套組下單 -->
+<a href="https://famistore.famiport.com.tw/users/2903801" target="_blank" class="btn online">
+👉 立即網購→全家店到店
+</a>
+
+<p class="trust">
+✔ 冷凍配送安心保存｜✔ 多家早餐店長期使用
+</p>
+
+</div>
+
+<!-- 套組 -->
 <div class="bundle">
 
-<h2>🎁 套組下單</h2>
+<h2>🎁 套組下單（直接傳LINE）</h2>
 
-<h3>超值A組 $499</h3>
-<p>里肌肉片×1、培根片×1、火腿×1、起司×1</p>
-
-<a class="lineBtn"
-href="https://line.me/R/msg/text/?我要訂購：超值A組%20$499%0A里肌肉片x1%0A培根片x1%0A火腿x1%0A起司x1">
-👉 一鍵傳送LINE訂單
-</a>
-
-<h3>超值B組 $429</h3>
-<p>雞塊×1、洋蔥圈×1、雞米花×1、薯餅×1</p>
+<div class="card">
+<h3>A組：露營開趴炸翻天 $499</h3>
+<p>香香雞×1、檸檬雞柳×1、脆薯×1、夏威夷/總匯披薩×各1</p>
 
 <a class="lineBtn"
-href="https://line.me/R/msg/text/?我要訂購：超值B組%20$429%0A雞塊x1%0A洋蔥圈x1%0A雞米花x1%0A薯餅x1">
-👉 一鍵傳送LINE訂單
+href="https://line.me/R/msg/text/?我要訂購：超值A組%20$499%0A香香雞×1、檸檬雞柳×1、脆薯×1、夏威夷/總匯披薩×各1">
+👉 一鍵送出LINE訂單
 </a>
+</div>
+
+<div class="card">
+<h3>B組：輕鬆好料理 $429</h3>
+<p>煎餃×1、三星蔥餅×1、卡拉雞腿×1、鐵板麵×2</p>
+
+<a class="lineBtn"
+href="https://line.me/R/msg/text/?我要訂購：超值B組%20$429%0A煎餃×1、三星蔥餅×1、卡拉雞腿×1、鐵板麵×2">
+👉 一鍵送出LINE訂單
+</a>
+</div>
 
 </div>
 
