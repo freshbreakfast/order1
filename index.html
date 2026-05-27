@@ -12,7 +12,6 @@ body {
     text-align: center;
     font-family: sans-serif;
     background: #111;
-    color:#fff;
 }
 
 img {
@@ -23,7 +22,7 @@ img {
 }
 
 .buttons {
-    margin: 20px 0;
+    margin: 25px 0;
 }
 
 .btn {
@@ -42,7 +41,7 @@ img {
 }
 
 .online {
-    background-color: #fff;
+    background-color: #ffffff;
     color: #111;
 }
 
@@ -53,10 +52,6 @@ img {
     margin:20px auto;
     max-width:600px;
     border-radius:12px;
-}
-
-.bundle h3 {
-    margin:10px 0;
 }
 
 .lineBtn {
@@ -73,21 +68,25 @@ img {
 
 <body>
 
-<!-- 🔥 標題 -->
-<div style="background:#000;padding:20px;">
-<h1>
-🔥 限時搶購<br>早餐食材優惠活動
-</h1>
-<p>🔥 早餐店等級食材，在家3分鐘上桌</p>
+<!-- 🔥 原本標題（完全不動） -->
+<div style="background:#000; padding:24px 10px;">
+  <h1 style="margin:0; font-size:22px; line-height:1.5;">
+    🔥 限時搶購<br>
+    早餐食材優惠活動
+  </h1>
+
+  <p style="margin:12px 0 0; font-size:14px; color:#ccc;">
+    門市取貨 / 全家配送・超方便 🚚
+  </p>
 </div>
 
 <!-- 第1頁 -->
-<img src="https://freshbreakfast.github.io/DM-order/image1.png">
+<img src="https://freshbreakfast.github.io/DM-order/image1.png?v=3">
 
 <!-- 第2頁 -->
-<img src="https://freshbreakfast.github.io/DM-order/image4.png">
+<img src="https://freshbreakfast.github.io/DM-order/image4.png?v=3">
 
-<!-- 🔥 第二張圖下面 CTA -->
+<!-- ✅ CTA（只在第2頁下面） -->
 <div class="buttons">
 
 <a href="https://freshbreakfast.github.io/order-group/" class="btn store">
@@ -101,16 +100,19 @@ img {
 </div>
 
 <!-- 信任感 -->
-<p style="font-size:13px;color:#ccc;">
+<p style="color:#ccc; font-size:13px;">
 ✔ 早餐店老闆指定使用  
 ✔ 團購熱銷中  
 ✔ 冷凍配送安心保存
 </p>
 
 <!-- 第3頁 -->
-<img src="https://freshbreakfast.github.io/DM-order/image5.png">
+<img src="https://freshbreakfast.github.io/DM-order/image5.png?v=3">
 
-<!-- 🔥 第4頁 套組 -->
+<!-- ✅ 第4頁（你剛剛沒顯示） -->
+<img src="https://freshbreakfast.github.io/DM-order/image6.png?v=1">
+
+<!-- 🔥 套組下單 -->
 <div class="bundle">
 
 <h2>🎁 套組下單</h2>
@@ -132,30 +134,6 @@ href="https://line.me/R/msg/text/?我要訂購：超值B組%20$429%0A雞塊x1%0A
 </a>
 
 </div>
-
-<!-- 🔥 自訂組合 -->
-<div class="bundle">
-
-<h2>🧾 自訂組合</h2>
-
-<textarea id="orderText" placeholder="輸入品項，例如：
-里肌肉片 2
-培根 1"
-style="width:100%;height:100px;"></textarea>
-
-<button onclick="sendLine()" class="lineBtn">
-👉 一鍵傳送訂單到LINE
-</button>
-
-</div>
-
-<script>
-function sendLine(){
-  var text = document.getElementById("orderText").value;
-  var url = "https://line.me/R/msg/text/?我要訂購：%0A" + encodeURIComponent(text);
-  window.open(url);
-}
-</script>
 
 </body>
 </html>
