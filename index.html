@@ -42,11 +42,12 @@ img {
     display: block;
     margin: 0 auto;
     margin-bottom: 10px;
-    pointer-events: none;
 }
 
 .buttons {
     margin: 25px 0 30px;
+    position: relative;
+    z-index: 10;
 }
 
 .btn {
@@ -61,6 +62,9 @@ img {
     font-weight: bold;
     animation: bounce 1.5s infinite;
     box-sizing: border-box;
+    position: relative;
+    z-index: 999;
+    cursor: pointer;
 }
 
 .store {
@@ -121,7 +125,7 @@ img {
     border-radius:999px;
     text-decoration:none;
     font-weight:bold;
-    z-index:999;
+    z-index:9999;
     box-shadow:0 4px 12px rgba(0,0,0,0.3);
 }
 </style>
@@ -137,13 +141,9 @@ img {
 <span style="color:#fff;">早餐食材優惠活動</span>
 </h1>
 
-<p style="margin:12px 0 0;font-size:14px;">
-<span style="color:#ffd700;">門市取貨</span> /
-<span style="color:#ffd700;">全家配送</span> 🚚
-</p>
-
-<p style="color:#ffeb3b;font-size:15px;margin-top:10px;">
-⏰ 本週優惠倒數中
+<!-- 超方便 -->
+<p style="margin:12px 0 0;font-size:15px;color:#fff;">
+門市取貨 / 全家配送・超方便 🚚
 </p>
 
 </div>
@@ -153,7 +153,7 @@ img {
 <img src="./image4.png?v=1" loading="lazy">
 <img src="./image5.png?v=1" loading="lazy">
 
-<!-- 🔥 第三張圖下面：門市 / 全家 -->
+<!-- 門市 / 全家 -->
 <div>
 
 <p style="color:#fff; font-size:13px;">
@@ -169,7 +169,7 @@ img {
 
 <a href="https://famistore.famiport.com.tw/users/2903801"
    class="btn online">
-🚚 好賣+網購（全家店到店）
+🚚 好賣+官網（全家店到店）
 </a>
 
 <p class="trust">
@@ -178,6 +178,7 @@ img {
 </p>
 
 </div>
+
 </div>
 
 <!-- 第4張 -->
@@ -214,7 +215,7 @@ margin-bottom:8px;
 
 </div>
 
-<!-- 🔥 最底LINE -->
+<!-- LINE下單 -->
 <div class="buttons">
 
 <a class="lineBtn"
@@ -235,7 +236,7 @@ href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購B組%20$550%0A煎餃×1
 
 </div>
 
-<!-- 浮動LINE按鈕 -->
+<!-- 浮動LINE -->
 <a class="floatingLine"
 href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購">
 🔥 LINE立即下單
