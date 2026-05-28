@@ -19,31 +19,27 @@ body {
     background: #111;
 }
 
-/* 動畫 */
 @keyframes flash {
   0%,100%{opacity:1;}
   50%{opacity:0.4;}
 }
-
 @keyframes slideDown {
   from{transform:translateY(-20px);opacity:0;}
   to{transform:translateY(0);opacity:1;}
 }
-
 @keyframes bounce {
   0%,100%{transform:translateY(0);}
   50%{transform:translateY(-3px);}
 }
 
-/* 圖片 */
 img {
     width: 100%;
     max-width: 600px;
     display: block;
     margin: 0 auto;
+    margin-bottom: 10px;
 }
 
-/* 按鈕 */
 .buttons {
     margin: 25px 0 30px;
 }
@@ -56,6 +52,7 @@ img {
     border-radius: 999px;
     text-decoration: none;
     font-weight: bold;
+    animation: bounce 1.5s infinite;
 }
 
 .store {
@@ -73,12 +70,15 @@ img {
     display:block;
     background:#06C755;
     color:#fff;
-    padding:14px;
-    margin:12px auto;
+    padding:16px;
+    margin:14px auto;
     max-width:400px;
     border-radius:999px;
     text-decoration:none;
     font-weight:bold;
+    font-size:17px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    animation:bounce 1.5s infinite;
 }
 
 .trust {
@@ -87,7 +87,6 @@ img {
     margin-top:10px;
 }
 
-/* 套組 */
 .bundle {
     background:#fff;
     color:#111;
@@ -106,28 +105,22 @@ img {
 
 <body>
 
-<!-- 🔥 標題 -->
+<!-- 標題 -->
 <div style="background:#000; padding:24px 10px; animation:slideDown 0.8s;">
 
 <h1 style="margin:0;font-size:22px;line-height:1.6;font-weight:bold;">
-
-<span style="color:#ff4d4f;animation:flash 1.2s infinite;">
-🔥 限時搶購
-</span><br>
-
-<span style="color:#fff;">
-早餐食材優惠活動
-</span><br>
-
-<span style="color:#fff;font-size:16px;">
-⚡ 超方便
-</span>
-
+<span style="color:#ff4d4f;animation:flash 1.2s infinite;">🔥 限時搶購</span><br>
+<span style="color:#fff;">早餐食材優惠活動</span>
 </h1>
 
 <p style="margin:12px 0 0;font-size:14px;">
 <span style="color:#ffd700;">門市取貨</span> /
 <span style="color:#ffd700;">全家配送</span> 🚚
+<span style="color:#ff4d4f;font-weight:bold;">⚡ 超方便</span>
+</p>
+
+<p style="color:#ff4d4f;font-size:13px;font-weight:bold;margin-top:8px;">
+⏰ 今日23:59截止・熱門商品可能提前完售
 </p>
 
 </div>
@@ -136,28 +129,41 @@ img {
 <img src="./image2.png?v=1">
 <img src="./image4.png?v=1">
 <img src="./image5.png?v=1">
+<img src="./image6.png?v=1">
 
-<!-- 🔥 第3張圖下面：成交按鈕 -->
+<!-- 取貨方式 -->
+<div>
+
+<p style="color:#ff4d4f; font-size:13px; font-weight:bold;">
+⏰ 熱銷中🔥 今日可能提前完售
+</p>
+
+<p style="color:#fff; font-size:13px;">
+請選擇您的取貨方式👇
+</p>
+
 <div class="buttons">
 
-<a class="lineBtn"
-href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購A組%20$499%0A香香雞×1、檸檬雞柳×1、脆薯×1、披薩×2">
-👉 一鍵下單 A組
+<a href="https://freshbreakfast.github.io/order-group/"
+   target="_blank"
+   class="btn store">
+🔥 立即搶購（門市取貨）
 </a>
 
-<a class="lineBtn"
-href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購B組%20$429%0A煎餃×1、蔥餅×1、卡拉雞腿×1、鐵板麵×2">
-👉 一鍵下單 B組
+<a href="https://famistore.famiport.com.tw/users/2903801"
+   target="_blank"
+   class="btn online">
+🚚 立即下單（全家店到店）
 </a>
-
-<p class="trust">
-⚡ 點擊後會直接進LINE，訂單已幫你填好
-</p>
 
 </div>
 
-<!-- 第4張 -->
-<img src="./image6.png?v=1">
+<p class="trust">
+✔ 官方網站下單・安全可靠<br>
+✔ 不需註冊・快速完成訂單
+</p>
+
+</div>
 
 <!-- 套組 -->
 <div class="bundle">
@@ -173,6 +179,27 @@ href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購B組%20$429%0A煎餃×1
 <h3>B組：輕鬆料理 $429</h3>
 <p>煎餃、蔥餅、卡拉雞腿、鐵板麵</p>
 </div>
+
+</div>
+
+<!-- 🔥 最底LINE下單 -->
+<div class="buttons">
+
+<a class="lineBtn"
+href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購A組%20$499%0A香香雞×1、檸檬雞柳×1、脆薯×1、披薩×2">
+🔥 立即用LINE下單 A組（免打字）
+</a>
+
+<a class="lineBtn"
+href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購B組%20$429%0A煎餃×1、蔥餅×1、卡拉雞腿×1、鐵板麵×2">
+🔥 立即用LINE下單 B組（免打字）
+</a>
+
+<p class="trust">
+✔ 官方LINE安全下單<br>
+✔ 訂單內容已幫你填好<br>
+✔ 不需註冊・直接送出
+</p>
 
 </div>
 
