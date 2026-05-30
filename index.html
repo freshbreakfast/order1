@@ -147,6 +147,50 @@ img{
     opacity:1;
     transform:translateY(0);
 }
+
+/* =========================
+   限時搶購動畫
+========================= */
+.flash{
+    color:#ff3b3b;
+    display:inline-block;
+    animation:flashAnim 1s infinite, bounce 1.2s infinite;
+    text-shadow:0 0 8px rgba(255,59,59,0.8);
+}
+
+@keyframes flashAnim{
+    0%,100%{opacity:1;}
+    50%{opacity:0.3;}
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-5px);}
+}
+
+/* =========================
+   配送黃色標籤
+========================= */
+.delivery{
+    margin:8px 0 0;
+    font-size:13px;
+    color:#000;
+    background:linear-gradient(90deg,#ffd700,#ffcc00);
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+/* =========================
+   緊迫感文字
+========================= */
+.urgency{
+    color:#ffcc00;
+    font-size:12px;
+    margin-top:6px;
+    animation:flashAnim 1.2s infinite;
+}
 </style>
 </head>
 
@@ -155,11 +199,17 @@ img{
 <!-- 標題 -->
 <div style="background:#000;padding:24px 10px;">
 <h1 style="margin:0;font-size:22px;color:#fff;">
-🔥 早餐食材選品中心
+<span class="flash">🔥 限時搶購</span><br>
+早餐食材選品中心
 </h1>
-<p style="margin:8px 0 0;font-size:13px;color:#ccc;">
+
+<p class="delivery">
 門市取貨 / 全家配送・超方便 🚚
 </p>
+
+<div class="urgency">
+⏰ 今日訂單爆滿中・庫存快速減少！
+</div>
 </div>
 
 <!-- 圖片 -->
@@ -171,31 +221,17 @@ img{
 <p style="color:#fff;font-size:13px;">請選擇取貨方式👇</p>
 
 <a href="https://freshbreakfast.github.io/order-group/" class="btn store">
-🔥 立即搶購（門市取貨）
+🔥 搶購（三重門市取貨）
 </a>
 
 <a href="https://famistore.famiport.com.tw/users/2903801" class="btn online">
-🚚 好賣+官網（全家配送）
+🚚 好賣+（全家配送）
 </a>
 
 <!-- 套組 -->
 <div class="bundle">
 
-<h2 style="font-size:18px;margin:6px 0;">🎁 套組訂購</h2>
-
-<div class="card">
-<h3 style="margin:6px 0;">A組：露營開趴 $709</h3>
-<p style="margin:4px 0;font-size:14px;">
-香香雞、檸檬雞柳、脆薯、披薩
-</p>
-</div>
-
-<div class="card">
-<h3 style="margin:6px 0;">B組：輕鬆料理 $550</h3>
-<p style="margin:4px 0;font-size:14px;">
-煎餃、蔥餅、卡拉雞腿、鐵板麵
-</p>
-</div>
+<h2 style="font-size:18px;margin:6px 0;">🎁 套組＜特價＞訂購</h2>
 
 </div>
 
@@ -204,12 +240,12 @@ img{
 
 <div style="color:#ffd700;font-size:12px;">🔥 最多人選這組</div>
 
-<a class="lineBtn a" href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購A組">
-🔥 立即下單 A組
+<a class="lineBtn a" href="https://line.me/R/oaMessage/@567ncwhd/?訂購A組 $489,檸檬雞柳x1、脆薯x1、夏威夷披薩2">
+🔥 A組: 開趴炸翻天 $489
 </a>
 
-<a class="lineBtn b" href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購B組">
-👉 立即下單 B組
+<a class="lineBtn b" href="https://line.me/R/oaMessage/@567ncwhd/?訂購B組 $509,煎餃x1、三星蔥餅x1、紐澳良雞腿x1、蘑菇鐵板麵x2">
+👉 B組: 輕鬆好料理 $509
 </a>
 
 </div>
@@ -219,7 +255,7 @@ img{
 
 <script>
 const names=["王小姐","陳先生","林小姐","張先生","李小姐"];
-const areas=["新北","台北","桃園","台中"];
+const areas=["新北板橋","新北中和","新北三重","台北信義"];
 const products=["A組","A組","A組","B組"];
 
 function r(a){
