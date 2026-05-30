@@ -14,166 +14,254 @@ body{
     background:#111;
 }
 
+/* =========================
+   ⭐ 手機點擊核心優化
+========================= */
 html, body{
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     overscroll-behavior: none;
 }
 
-a, button{
-    -webkit-user-select:none;
+a, button, .btn, .lineBtn{
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-a:active{
-    transform: scale(0.97);
+/* 點擊回饋 */
+a:active, button:active, .btn:active, .lineBtn:active{
+    transform: scale(0.98);
+    transition: transform 0.05s ease;
 }
 
+/* 防止 layer 卡點擊 */
+*{
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* =========================
+   圖片
+========================= */
 img{
     width:100%;
     max-width:600px;
-    margin:auto;
     display:block;
+    margin:0 auto 10px;
 }
 
+/* =========================
+   主按鈕
+========================= */
 .btn{
     display:block;
     width:85%;
     max-width:420px;
-    padding:16px;
+    padding:16px 28px;
     margin:12px auto;
+    font-size:18px;
     border-radius:999px;
-    font-weight:bold;
     text-decoration:none;
+    font-weight:bold;
 }
 
 .store{background:#06C755;color:#fff;}
-.online{background:#fff;color:#111;}
+.online{background:#fff;color:#111;border:1px solid #ddd;}
 
+/* =========================
+   LINE 按鈕
+========================= */
 .lineBtn{
     display:block;
     margin:10px auto;
     border-radius:999px;
-    padding:15px;
+    text-decoration:none;
+    font-weight:bold;
     color:#fff;
     background:#06C755;
-    width:80%;
-    max-width:360px;
-    font-weight:bold;
 }
 
+/* A 主推 */
+.lineBtn.a{
+    width:78%;
+    max-width:360px;
+    font-size:17px;
+    padding:16px 20px;
+    background:linear-gradient(45deg,#06C755,#00e676);
+    box-shadow:0 6px 18px rgba(6,199,85,0.25);
+}
+
+/* B 次要 */
+.lineBtn.b{
+    width:65%;
+    max-width:300px;
+    font-size:15px;
+    padding:13px 18px;
+    opacity:0.92;
+}
+
+/* =========================
+   套組
+========================= */
 .bundle{
     background:#fff;
-    padding:20px;
+    color:#111;
+    padding:20px 15px 10px;
 }
 
 .card{
-    background:#f5f5f5;
-    padding:15px;
+    background:#f7f7f7;
     border-radius:12px;
-    margin:10px auto;
+    padding:15px;
+    margin:8px auto;
     max-width:500px;
 }
 
-/* popup */
+/* =========================
+   彈出通知（不卡點擊）
+========================= */
 #popupOrder{
     position:fixed;
     bottom:20px;
     right:20px;
     background:#fff;
-    padding:10px;
-    border-radius:10px;
+    color:#111;
+    padding:10px 14px;
+    border-radius:12px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.2);
     font-size:13px;
+    max-width:220px;
+
     opacity:0;
-    transition:.3s;
+    transform:translateY(20px);
+    transition:all 0.35s ease;
+
+    z-index:999;
+
+    pointer-events:none;
 }
-#popupOrder.show{opacity:1;}
+
+#popupOrder.show{
+    opacity:1;
+    transform:translateY(0);
+}
 </style>
 </head>
 
 <body>
 
-<h2 style="color:#fff;">🔥 早餐食材選品中心</h2>
+<!-- 標題 -->
+<div style="background:#000;padding:24px 10px;">
+<h1 style="margin:0;font-size:22px;color:#fff;">
+🔥 早餐食材選品中心
+</h1>
+<p style="margin:8px 0 0;font-size:13px;color:#ccc;">
+門市取貨 / 全家配送・超方便 🚚
+</p>
+</div>
 
+<!-- 圖片 -->
 <img src="./image1.png">
 <img src="./image4.png">
+<img src="./image5.png">
 
-<p style="color:#fff;">請選擇取貨方式👇</p>
+<!-- 主按鈕 -->
+<p style="color:#fff;font-size:13px;">請選擇取貨方式👇</p>
 
-<a class="btn store" onclick="goStore()">門市取貨</a>
-<a class="btn online" onclick="goOnline()">全家配送</a>
+<a href="https://freshbreakfast.github.io/order-group/" class="btn store">
+🔥 立即搶購（門市取貨）
+</a>
 
+<a href="https://famistore.famiport.com.tw/users/2903801" class="btn online">
+🚚 好賣+官網（全家配送）
+</a>
+
+<!-- 套組 -->
 <div class="bundle">
-<h3>🎁 套組</h3>
+
+<h2 style="font-size:18px;margin:6px 0;">🎁 套組訂購</h2>
 
 <div class="card">
-A組：$709
+<h3 style="margin:6px 0;">A組：露營開趴 $709</h3>
+<p style="margin:4px 0;font-size:14px;">
+香香雞、檸檬雞柳、脆薯、披薩
+</p>
 </div>
 
 <div class="card">
-B組：$550
-</div>
+<h3 style="margin:6px 0;">B組：輕鬆料理 $550</h3>
+<p style="margin:4px 0;font-size:14px;">
+煎餃、蔥餅、卡拉雞腿、鐵板麵
+</p>
 </div>
 
-<a class="lineBtn" onclick="order('A組')">🔥 LINE下單 A組</a>
-<a class="lineBtn" onclick="order('B組')">👉 LINE下單 B組</a>
+</div>
 
-<div id="popupOrder"></div>
+<!-- LINE -->
+<div style="margin-top:10px;">
+
+<div style="color:#ffd700;font-size:12px;">🔥 最多人選這組</div>
+
+<a class="lineBtn a" href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購A組">
+🔥 立即下單 A組
+</a>
+
+<a class="lineBtn b" href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購B組">
+👉 立即下單 B組
+</a>
+
+</div>
+
+<!-- 彈出通知 -->
+<div id="popupOrder"><div id="popupText"></div></div>
 
 <script>
+const names=["王小姐","陳先生","林小姐","張先生","李小姐"];
+const areas=["新北","台北","桃園","台中"];
+const products=["A組","A組","A組","B組"];
 
-/* =========================
-   ⭐ 核心：LINE下單
-========================= */
-
-function order(product){
-
-    let msg = `我要訂購👉 ${product}\n姓名：\n電話：\n取貨方式：`;
-
-    let url = "https://line.me/R/msg/text/?"+encodeURIComponent(msg);
-
-    window.location.href = url;
+function r(a){
+    return a[Math.floor(Math.random()*a.length)];
 }
 
-/* =========================
-   ⭐ 跳轉優化
-========================= */
-
-function goStore(){
-    window.location.href="https://freshbreakfast.github.io/order-group/?utm=store";
+function timeText(){
+    return Math.random()<0.6 ?
+    Math.floor(Math.random()*40+10)+"秒前" :
+    Math.floor(Math.random()*5+1)+"分鐘前";
 }
-
-function goOnline(){
-    window.location.href="https://famistore.famiport.com.tw/users/2903801?utm=ship";
-}
-
-/* =========================
-   ⭐ 假訂單 popup（已修正）
-========================= */
-
-const areas=["板橋","中和","新莊","台北","桃園"];
-const names=["王小姐","陳先生","林小姐"];
-const products=["A組","B組"];
 
 function showPopup(){
+    const el=document.getElementById("popupOrder");
+    const text=document.getElementById("popupText");
 
-    let text = 
-        areas[Math.floor(Math.random()*areas.length)]+" "+
-        names[Math.floor(Math.random()*names.length)]+
-        " 訂購 "+products[Math.floor(Math.random()*products.length)];
+    if(!el || !text) return;
 
-    let el=document.getElementById("popupOrder");
-    el.innerHTML=text;
+    text.innerHTML=`
+    ${timeText()}<br>
+    ${r(areas)}的${r(names)}<br>
+    訂購了 <b>${r(products)}</b>
+    `;
 
     el.classList.add("show");
 
     setTimeout(()=>{
         el.classList.remove("show");
-    },2000);
+    },2200);
 }
 
-setInterval(showPopup,8000);
+/* ⭐ 穩定不卡手機版本 */
+function loop(){
+    setTimeout(()=>{
+        showPopup();
+        loop();
+    }, Math.random()*10000 + 7000);
+}
 
+setTimeout(loop,4000);
 </script>
 
 </body>
 </html>
+🎯 這版已經幫你做到
