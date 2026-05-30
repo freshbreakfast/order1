@@ -1,173 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>早餐食材選品中心｜限時搶購</title>
 
 <style>
-body{margin:0;text-align:center;font-family:sans-serif;background:#111;}
-html,body{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+body{
+    margin:0;
+    text-align:center;
+    font-family:sans-serif;
+    background:#111;
+}
 
-img{width:100%;max-width:600px;margin:0 auto 10px;display:block;}
+html, body{
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+}
+
+a, button{
+    -webkit-user-select:none;
+}
+
+a:active{
+    transform: scale(0.97);
+}
+
+img{
+    width:100%;
+    max-width:600px;
+    margin:auto;
+    display:block;
+}
 
 .btn{
-display:block;width:85%;max-width:420px;
-padding:16px;margin:12px auto;
-border-radius:999px;text-decoration:none;font-weight:bold;
+    display:block;
+    width:85%;
+    max-width:420px;
+    padding:16px;
+    margin:12px auto;
+    border-radius:999px;
+    font-weight:bold;
+    text-decoration:none;
 }
 
 .store{background:#06C755;color:#fff;}
 .online{background:#fff;color:#111;}
 
 .lineBtn{
-display:block;margin:10px auto;border-radius:999px;
-text-decoration:none;font-weight:bold;color:#fff;
-background:#06C755;
+    display:block;
+    margin:10px auto;
+    border-radius:999px;
+    padding:15px;
+    color:#fff;
+    background:#06C755;
+    width:80%;
+    max-width:360px;
+    font-weight:bold;
 }
 
-.lineBtn.a{
-width:78%;max-width:360px;font-size:17px;
-padding:16px;background:linear-gradient(45deg,#06C755,#00e676);
+.bundle{
+    background:#fff;
+    padding:20px;
 }
 
-.lineBtn.b{
-width:65%;max-width:300px;font-size:15px;
-padding:13px;opacity:0.9;
+.card{
+    background:#f5f5f5;
+    padding:15px;
+    border-radius:12px;
+    margin:10px auto;
+    max-width:500px;
 }
 
-.bundle{background:#fff;color:#111;padding:20px 10px;}
-.card{background:#f7f7f7;border-radius:12px;padding:12px;margin:8px auto;max-width:500px;}
-
+/* popup */
 #popupOrder{
-position:fixed;bottom:20px;right:20px;
-background:#fff;padding:10px 14px;border-radius:12px;
-box-shadow:0 6px 20px rgba(0,0,0,0.2);
-font-size:13px;opacity:0;transform:translateY(20px);
-transition:0.3s;z-index:999;
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#fff;
+    padding:10px;
+    border-radius:10px;
+    font-size:13px;
+    opacity:0;
+    transition:.3s;
 }
-#popupOrder.show{opacity:1;transform:translateY(0);}
+#popupOrder.show{opacity:1;}
 </style>
 </head>
 
 <body>
 
-<div style="background:#000;padding:24px 10px;">
-<h1 style="color:#fff;margin:0;font-size:22px;">🔥 早餐食材選品中心</h1>
-<p style="color:#ffd700;font-size:12px;margin-top:6px;">
-門市取貨 / 全家配送・超方便
-</p>
-</div>
+<h2 style="color:#fff;">🔥 早餐食材選品中心</h2>
 
 <img src="./image1.png">
 <img src="./image4.png">
-<img src="./image5.png">
 
-<p style="color:#fff;font-size:13px;">請選擇取貨方式👇</p>
+<p style="color:#fff;">請選擇取貨方式👇</p>
 
-<a href="https://freshbreakfast.github.io/order-group/" class="btn store">
-🔥 立即搶購（門市取貨）
-</a>
-
-<a href="./redirect.html" class="btn online">
-🚚 好賣+官網（全家配送）
-</a>
+<a class="btn store" onclick="goStore()">門市取貨</a>
+<a class="btn online" onclick="goOnline()">全家配送</a>
 
 <div class="bundle">
-<h2>🎁 套組訂購</h2>
+<h3>🎁 套組</h3>
 
 <div class="card">
-<h3>A組：露營開趴 $709</h3>
-<p>香香雞、檸檬雞柳、脆薯、披薩</p>
+A組：$709
 </div>
 
 <div class="card">
-<h3>B組：輕鬆料理 $550</h3>
-<p>煎餃、蔥餅、卡拉雞腿、鐵板麵</p>
+B組：$550
 </div>
 </div>
 
-<div style="color:#ffd700;font-size:12px;">🔥 最多人選這組</div>
+<a class="lineBtn" onclick="order('A組')">🔥 LINE下單 A組</a>
+<a class="lineBtn" onclick="order('B組')">👉 LINE下單 B組</a>
 
-<a class="lineBtn a" href="#">🔥 立即下單 A組</a>
-<a class="lineBtn b" href="#">👉 立即下單 B組</a>
-
-<div id="popupOrder"><div id="popupText"></div></div>
+<div id="popupOrder"></div>
 
 <script>
-const areas=["新北板橋","台北信義","桃園中壢","台中西屯"];
-const names=["王小姐","陳先生","林小姐","張先生"];
-const products=["A組","A組","A組","B組"];
 
-function r(a){return a[Math.floor(Math.random()*a.length)];}
+/* =========================
+   ⭐ 核心：LINE下單
+========================= */
+
+function order(product){
+
+    let msg = `我要訂購👉 ${product}\n姓名：\n電話：\n取貨方式：`;
+
+    let url = "https://line.me/R/msg/text/?"+encodeURIComponent(msg);
+
+    window.location.href = url;
+}
+
+/* =========================
+   ⭐ 跳轉優化
+========================= */
+
+function goStore(){
+    window.location.href="https://freshbreakfast.github.io/order-group/?utm=store";
+}
+
+function goOnline(){
+    window.location.href="https://famistore.famiport.com.tw/users/2903801?utm=ship";
+}
+
+/* =========================
+   ⭐ 假訂單 popup（已修正）
+========================= */
+
+const areas=["板橋","中和","新莊","台北","桃園"];
+const names=["王小姐","陳先生","林小姐"];
+const products=["A組","B組"];
 
 function showPopup(){
-let el=document.getElementById("popupOrder");
-let text=document.getElementById("popupText");
 
-text.innerHTML=`${r(areas)}的${r(names)}<br>訂購了 <b>${r(products)}</b>`;
-el.classList.add("show");
+    let text = 
+        areas[Math.floor(Math.random()*areas.length)]+" "+
+        names[Math.floor(Math.random()*names.length)]+
+        " 訂購 "+products[Math.floor(Math.random()*products.length)];
 
-setTimeout(()=>{el.classList.remove("show");},2200);
+    let el=document.getElementById("popupOrder");
+    el.innerHTML=text;
+
+    el.classList.add("show");
+
+    setTimeout(()=>{
+        el.classList.remove("show");
+    },2000);
 }
 
-function loop(){
-setTimeout(()=>{showPopup();loop();},Math.random()*8000+6000);
-}
-setTimeout(loop,3000);
-</script>
+setInterval(showPopup,8000);
 
-</body>
-</html>
-🚀 ✅ ② 中繼跳轉頁 redirect.html（智能版）
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>前往好賣+</title>
-
-<style>
-body{
-margin:0;height:100vh;
-display:flex;justify-content:center;align-items:center;
-background:#111;color:#fff;font-family:sans-serif;
-}
-
-.loader{
-width:40px;height:40px;
-border:4px solid #333;
-border-top:4px solid #06C755;
-border-radius:50%;
-animation:spin 1s linear infinite;
-margin:auto;
-}
-
-@keyframes spin{to{transform:rotate(360deg);}}
-</style>
-</head>
-
-<body>
-
-<div class="loader"></div>
-
-<script>
-const targetUrl="https://famistore.famiport.com.tw/users/2903801";
-
-const ua=navigator.userAgent;
-let delay=300;
-
-if(ua.includes("Line")) delay=500;
-else if(ua.includes("Instagram")) delay=650;
-else delay=250;
-
-/* 預連線 */
-const link=document.createElement("link");
-link.rel="preconnect";
-link.href="https://famistore.famiport.com.tw";
-document.head.appendChild(link);
-
-setTimeout(()=>{
-location.href=targetUrl;
-},delay);
 </script>
 
 </body>
