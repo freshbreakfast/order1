@@ -41,7 +41,7 @@ img{
     margin:0 auto 10px;
 }
 
-/* 按鈕 */
+/* 主按鈕 */
 .btn{
     display:block;
     width:85%;
@@ -58,7 +58,7 @@ img{
 .store{background:#06C755;color:#fff;}
 .online{background:#fff;color:#111;border:1px solid #ddd;}
 
-/* LINE按鈕（基礎） */
+/* LINE按鈕 */
 .lineBtn{
     display:block;
     margin:10px auto;
@@ -70,7 +70,7 @@ img{
     animation:bounce 1.5s infinite;
 }
 
-/* A 主推 */
+/* A / B 層級 */
 .lineBtn.a{
     width:78%;
     max-width:360px;
@@ -78,20 +78,17 @@ img{
     padding:16px 20px;
     background:linear-gradient(45deg,#06C755,#00e676);
     box-shadow:0 6px 18px rgba(6,199,85,0.45);
-    transform:scale(1.02);
 }
 
-/* B 次要 */
 .lineBtn.b{
     width:65%;
     max-width:300px;
     font-size:15px;
     padding:13px 18px;
     opacity:0.9;
-    box-shadow:0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* 信任 */
+/* 信任文字 */
 .trust{
     color:#ffd700;
     font-size:13px;
@@ -113,7 +110,7 @@ img{
     max-width:500px;
 }
 
-/* 彈出通知 */
+/* 🔥 彈出通知（已修正不擋點擊） */
 #popupOrder{
     position:fixed;
     bottom:20px;
@@ -125,11 +122,17 @@ img{
     box-shadow:0 6px 20px rgba(0,0,0,0.2);
     font-size:13px;
     max-width:220px;
+
     opacity:0;
     transform:translateY(20px);
     transition:all 0.4s ease;
-    z-index:99999;
+
+    z-index:9999;
+
+    /* ⭐ 關鍵：避免擋住點擊 */
+    pointer-events:none;
 }
+
 #popupOrder.show{
     opacity:1;
     transform:translateY(0);
@@ -153,19 +156,19 @@ img{
 </div>
 
 <!-- 圖片 -->
-<img src="./image1.png?v=7">
-<img src="./image4.png?v=7">
-<img src="./image5.png?v=7">
+<img src="./image1.png">
+<img src="./image4.png">
+<img src="./image5.png">
 
 <!-- 按鈕 -->
 <p style="color:#fff;font-size:13px;">請選擇您的取貨方式👇</p>
 
 <a href="https://freshbreakfast.github.io/order-group/" class="btn store">
-🔥 搶購（三重門市取貨）
+🔥 立即搶購（門市取貨）
 </a>
 
 <a href="https://famistore.famiport.com.tw/users/2903801" class="btn online">
-🚚 好賣+（全家配送）
+🚚 好賣+官網（全家配送）
 </a>
 
 <p class="trust">
@@ -173,41 +176,41 @@ img{
 ✔ 不需註冊・快速完成訂單
 </p>
 
-<img src="./image6.png?v=7">
+<img src="./image6.png">
 
 <!-- 套組 -->
 <div class="bundle">
 
-<h2 style="margin-bottom:6px;font-size:18px;">🎁 套組(門市取)-贈蛋餅皮</h2>
+<h2 style="margin-bottom:6px;font-size:18px;">🎁 套組訂購-贈蛋餅皮</h2>
 
 <div class="card">
 <div style="background:#ff4d4f;color:#fff;display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;">🔥 熱銷第一</div>
 
-<h3 style="margin:6px 0;">A組：開趴炸翻天 $511</h3>
+<h3 style="margin:6px 0;">A組：露營開趴 $709</h3>
 <p style="margin:4px 0;line-height:1.3;font-size:14px;">
-脆薯、檸檬雞柳、披薩
+香香雞、檸檬雞柳、脆薯、披薩
 </p>
 </div>
 
 <div class="card">
-<h3 style="margin:6px 0;">B組：輕鬆好料理 $550</h3>
+<h3 style="margin:6px 0;">B組：輕鬆料理 $550</h3>
 <p style="margin:4px 0;line-height:1.3;font-size:14px;">
-煎餃、三星蔥餅、卡拉雞腿、鐵板麵
+煎餃、蔥餅、卡拉雞腿、鐵板麵
 </p>
 </div>
 
 </div>
 
-<!-- LINE下單 -->
+<!-- LINE -->
 <div style="margin-top:10px;">
 
 <div style="color:#ffd700;font-size:12px;">🔥 最多人選這組</div>
 
-<a class="lineBtn a" href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購A組%20$709%0A檸檬雞柳×1、脆薯×1、夏威夷披薩×2、總匯夷披薩×1、贈蔥蛋餅皮(10片)×1">
+<a class="lineBtn a" href="#">
 🔥 立即下單 A組
 </a>
 
-<a class="lineBtn b" href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購B組%20$550%0A煎餃×1、三星蔥餅×1、原味卡拉雞腿×1、蘑菇鐵板麵×2、贈蔥蛋餅皮(10片)×1">
+<a class="lineBtn b" href="#">
 👉 立即下單 B組
 </a>
 
@@ -224,10 +227,12 @@ img{
 
 <script>
 const names=["王小姐","陳先生","林小姐","張先生","李小姐"];
-const areas=["三重","新莊","板橋","中和","土城"];
-const products=["A組","A組","A組","B組","B組"];
+const areas=["新北","台北","桃園","台中"];
+const products=["A組","A組","A組","B組"];
 
-function r(a){return a[Math.floor(Math.random()*a.length)];}
+function r(a){
+    return a[Math.floor(Math.random()*a.length)];
+}
 
 function timeText(){
     return Math.random()<0.6 ?
@@ -235,9 +240,11 @@ function timeText(){
     Math.floor(Math.random()*5+1)+"分鐘前";
 }
 
-function show(){
-    let el=document.getElementById("popupOrder");
-    let text=document.getElementById("popupText");
+function showPopup(){
+    const el=document.getElementById("popupOrder");
+    const text=document.getElementById("popupText");
+
+    if(!el || !text) return;
 
     text.innerHTML=`
     ${timeText()}<br>
@@ -247,17 +254,27 @@ function show(){
 
     el.classList.add("show");
 
-    setTimeout(()=>{el.classList.remove("show");},3000);
-}
-
-function loop(){
     setTimeout(()=>{
-        show();
-        loop();
-    },Math.random()*6000+6000);
+        el.classList.remove("show");
+    },2500);
 }
 
-setTimeout(loop,3000);
+/* ⭐ 穩定循環（不會卡手機） */
+function loop(){
+    const delay = Math.random()*9000 + 7000;
+
+    setTimeout(()=>{
+        try{
+            showPopup();
+        }catch(e){
+            console.log("popup error",e);
+        }
+        loop();
+    }, delay);
+}
+
+/* 延遲啟動避免卡首屏 */
+setTimeout(loop,4000);
 </script>
 
 </body>
