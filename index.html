@@ -15,7 +15,7 @@ body{
 }
 
 /* =========================
-   ⭐ 手機點擊核心優化
+   ⭐ 手機點擊穩定核心
 ========================= */
 html, body{
     touch-action: manipulation;
@@ -25,9 +25,9 @@ html, body{
 
 a, button, .btn, .lineBtn{
     touch-action: manipulation;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
+    -webkit-user-select:none;
+    user-select:none;
+    -webkit-touch-callout:none;
 }
 
 /* 點擊回饋 */
@@ -36,7 +36,7 @@ a:active, button:active, .btn:active, .lineBtn:active{
     transition: transform 0.05s ease;
 }
 
-/* 防止 layer 卡點擊 */
+/* 防 layer 卡點擊 */
 *{
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
@@ -71,7 +71,7 @@ img{
 .online{background:#fff;color:#111;border:1px solid #ddd;}
 
 /* =========================
-   LINE 按鈕
+   LINE A/B
 ========================= */
 .lineBtn{
     display:block;
@@ -83,7 +83,6 @@ img{
     background:#06C755;
 }
 
-/* A 主推 */
 .lineBtn.a{
     width:78%;
     max-width:360px;
@@ -93,7 +92,6 @@ img{
     box-shadow:0 6px 18px rgba(6,199,85,0.25);
 }
 
-/* B 次要 */
 .lineBtn.b{
     width:65%;
     max-width:300px;
@@ -120,7 +118,7 @@ img{
 }
 
 /* =========================
-   彈出通知（不卡點擊）
+   🔥 彈出通知
 ========================= */
 #popupOrder{
     position:fixed;
@@ -132,14 +130,13 @@ img{
     border-radius:12px;
     box-shadow:0 6px 20px rgba(0,0,0,0.2);
     font-size:13px;
-    max-width:220px;
+    max-width:240px;
 
     opacity:0;
     transform:translateY(20px);
     transition:all 0.35s ease;
 
     z-index:999;
-
     pointer-events:none;
 }
 
@@ -185,16 +182,12 @@ img{
 
 <div class="card">
 <h3 style="margin:6px 0;">A組：露營開趴 $709</h3>
-<p style="margin:4px 0;font-size:14px;">
-香香雞、檸檬雞柳、脆薯、披薩
-</p>
+<p style="margin:4px 0;font-size:14px;">香香雞、檸檬雞柳、脆薯、披薩</p>
 </div>
 
 <div class="card">
 <h3 style="margin:6px 0;">B組：輕鬆料理 $550</h3>
-<p style="margin:4px 0;font-size:14px;">
-煎餃、蔥餅、卡拉雞腿、鐵板麵
-</p>
+<p style="margin:4px 0;font-size:14px;">煎餃、蔥餅、卡拉雞腿、鐵板麵</p>
 </div>
 
 </div>
@@ -204,11 +197,11 @@ img{
 
 <div style="color:#ffd700;font-size:12px;">🔥 最多人選這組</div>
 
-<a class="lineBtn a" href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購A組">
+<a class="lineBtn a" href="#">
 🔥 立即下單 A組
 </a>
 
-<a class="lineBtn b" href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購B組">
+<a class="lineBtn b" href="#">
 👉 立即下單 B組
 </a>
 
@@ -218,25 +211,42 @@ img{
 <div id="popupOrder"><div id="popupText"></div></div>
 
 <script>
-const names=["王小姐","陳先生","林小姐","張先生","李小姐"];
-const areas=["新北","台北","桃園","台中"];
-const products=["A組","A組","A組","B組"];
 
+/* =========================
+   ⭐ 真實城市資料（升級版）
+========================= */
+const areas = [
+"新北板橋","新北中和","新北新莊",
+"台北信義","台北士林","台北中山",
+"桃園中壢","桃園龜山","桃園八德",
+"台中西屯","台中北區","台中南屯"
+];
+
+const names = [
+"王小姐","陳先生","林小姐","張先生","李小姐",
+"黃小姐","劉先生","吳小姐"
+];
+
+const products = ["A組","A組","A組","B組"];
+
+/* 隨機 */
 function r(a){
     return a[Math.floor(Math.random()*a.length)];
 }
 
+/* 時間 */
 function timeText(){
     return Math.random()<0.6 ?
     Math.floor(Math.random()*40+10)+"秒前" :
     Math.floor(Math.random()*5+1)+"分鐘前";
 }
 
+/* 彈窗 */
 function showPopup(){
     const el=document.getElementById("popupOrder");
     const text=document.getElementById("popupText");
 
-    if(!el || !text) return;
+    if(!el||!text) return;
 
     text.innerHTML=`
     ${timeText()}<br>
@@ -251,7 +261,7 @@ function showPopup(){
     },2200);
 }
 
-/* ⭐ 穩定不卡手機版本 */
+/* 穩定循環 */
 function loop(){
     setTimeout(()=>{
         showPopup();
@@ -260,6 +270,7 @@ function loop(){
 }
 
 setTimeout(loop,4000);
+
 </script>
 
 </body>
