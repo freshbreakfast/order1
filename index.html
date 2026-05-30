@@ -6,11 +6,6 @@
 
 <title>早餐食材選品中心｜限時搶購</title>
 
-<meta property="og:title" content="早餐食材選品中心｜限時搶購">
-<meta property="og:description" content="門市取貨 / 全家配送・超方便">
-<meta property="og:image" content="https://freshbreakfast.github.io/order1/image1.png">
-<meta property="og:url" content="https://freshbreakfast.github.io/order1/">
-
 <style>
 body{
     margin:0;
@@ -19,21 +14,37 @@ body{
     background:#111;
 }
 
-/* 動畫 */
-@keyframes flash{
-    0%,100%{opacity:1;}
-    50%{opacity:0.4;}
-}
-@keyframes slideDown{
-    from{transform:translateY(-20px);opacity:0;}
-    to{transform:translateY(0);opacity:1;}
-}
-@keyframes bounce{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-3px);}
+/* =========================
+   ⭐ 手機點擊核心優化
+========================= */
+html, body{
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
 }
 
-/* 圖片 */
+a, button, .btn, .lineBtn{
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* 點擊回饋 */
+a:active, button:active, .btn:active, .lineBtn:active{
+    transform: scale(0.98);
+    transition: transform 0.05s ease;
+}
+
+/* 防止 layer 卡點擊 */
+*{
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* =========================
+   圖片
+========================= */
 img{
     width:100%;
     max-width:600px;
@@ -41,7 +52,9 @@ img{
     margin:0 auto 10px;
 }
 
-/* 主按鈕 */
+/* =========================
+   主按鈕
+========================= */
 .btn{
     display:block;
     width:85%;
@@ -52,13 +65,14 @@ img{
     border-radius:999px;
     text-decoration:none;
     font-weight:bold;
-    animation:bounce 1.5s infinite;
 }
 
 .store{background:#06C755;color:#fff;}
 .online{background:#fff;color:#111;border:1px solid #ddd;}
 
-/* LINE按鈕 */
+/* =========================
+   LINE 按鈕
+========================= */
 .lineBtn{
     display:block;
     margin:10px auto;
@@ -67,41 +81,36 @@ img{
     font-weight:bold;
     color:#fff;
     background:#06C755;
-    animation:bounce 1.5s infinite;
 }
 
-/* A / B 層級 */
+/* A 主推 */
 .lineBtn.a{
     width:78%;
     max-width:360px;
     font-size:17px;
     padding:16px 20px;
     background:linear-gradient(45deg,#06C755,#00e676);
-    box-shadow:0 6px 18px rgba(6,199,85,0.45);
+    box-shadow:0 6px 18px rgba(6,199,85,0.25);
 }
 
+/* B 次要 */
 .lineBtn.b{
     width:65%;
     max-width:300px;
     font-size:15px;
     padding:13px 18px;
-    opacity:0.9;
+    opacity:0.92;
 }
 
-/* 信任文字 */
-.trust{
-    color:#ffd700;
-    font-size:13px;
-    margin-top:10px;
-    line-height:1.6;
-}
-
-/* 套組 */
+/* =========================
+   套組
+========================= */
 .bundle{
     background:#fff;
     color:#111;
     padding:20px 15px 10px;
 }
+
 .card{
     background:#f7f7f7;
     border-radius:12px;
@@ -110,7 +119,9 @@ img{
     max-width:500px;
 }
 
-/* 🔥 彈出通知（已修正不擋點擊） */
+/* =========================
+   彈出通知（不卡點擊）
+========================= */
 #popupOrder{
     position:fixed;
     bottom:20px;
@@ -125,11 +136,10 @@ img{
 
     opacity:0;
     transform:translateY(20px);
-    transition:all 0.4s ease;
+    transition:all 0.35s ease;
 
-    z-index:9999;
+    z-index:999;
 
-    /* ⭐ 關鍵：避免擋住點擊 */
     pointer-events:none;
 }
 
@@ -143,15 +153,12 @@ img{
 <body>
 
 <!-- 標題 -->
-<div style="background:#000;padding:24px 10px;animation:slideDown 0.8s;">
-<h1 style="margin:0;font-size:22px;line-height:1.6;">
-<span style="color:#ff4d4f;animation:flash 1.2s infinite;">🔥 限時搶購</span><br>
-<span style="color:#fff;">早餐食材選品中心</span>
+<div style="background:#000;padding:24px 10px;">
+<h1 style="margin:0;font-size:22px;color:#fff;">
+🔥 早餐食材選品中心
 </h1>
-
-<p style="margin:8px 0 0;font-size:13px;color:#ccc;line-height:1.3;">
-<span style="color:#ffd700;font-weight:600;">門市取貨 / 全家配送</span>
-・超方便 🚚
+<p style="margin:8px 0 0;font-size:13px;color:#ccc;">
+門市取貨 / 全家配送・超方便 🚚
 </p>
 </div>
 
@@ -160,8 +167,8 @@ img{
 <img src="./image4.png">
 <img src="./image5.png">
 
-<!-- 按鈕 -->
-<p style="color:#fff;font-size:13px;">請選擇您的取貨方式👇</p>
+<!-- 主按鈕 -->
+<p style="color:#fff;font-size:13px;">請選擇取貨方式👇</p>
 
 <a href="https://freshbreakfast.github.io/order-group/" class="btn store">
 🔥 立即搶購（門市取貨）
@@ -171,30 +178,21 @@ img{
 🚚 好賣+官網（全家配送）
 </a>
 
-<p class="trust">
-✔ 官方網站下單・安全可靠<br>
-✔ 不需註冊・快速完成訂單
-</p>
-
-<img src="./image6.png">
-
 <!-- 套組 -->
 <div class="bundle">
 
-<h2 style="margin-bottom:6px;font-size:18px;">🎁 套組訂購-贈蛋餅皮</h2>
+<h2 style="font-size:18px;margin:6px 0;">🎁 套組訂購</h2>
 
 <div class="card">
-<div style="background:#ff4d4f;color:#fff;display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;">🔥 熱銷第一</div>
-
 <h3 style="margin:6px 0;">A組：露營開趴 $709</h3>
-<p style="margin:4px 0;line-height:1.3;font-size:14px;">
+<p style="margin:4px 0;font-size:14px;">
 香香雞、檸檬雞柳、脆薯、披薩
 </p>
 </div>
 
 <div class="card">
 <h3 style="margin:6px 0;">B組：輕鬆料理 $550</h3>
-<p style="margin:4px 0;line-height:1.3;font-size:14px;">
+<p style="margin:4px 0;font-size:14px;">
 煎餃、蔥餅、卡拉雞腿、鐵板麵
 </p>
 </div>
@@ -206,19 +204,13 @@ img{
 
 <div style="color:#ffd700;font-size:12px;">🔥 最多人選這組</div>
 
-<a class="lineBtn a" href="#">
+<a class="lineBtn a" href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購A組">
 🔥 立即下單 A組
 </a>
 
-<a class="lineBtn b" href="#">
+<a class="lineBtn b" href="https://line.me/R/oaMessage/@567ncwhd/?我要訂購B組">
 👉 立即下單 B組
 </a>
-
-<p class="trust">
-✔ 官方LINE安全下單<br>
-✔ 訂單內容已幫你填好<br>
-✔ 不需註冊・直接送出
-</p>
 
 </div>
 
@@ -256,24 +248,17 @@ function showPopup(){
 
     setTimeout(()=>{
         el.classList.remove("show");
-    },2500);
+    },2200);
 }
 
-/* ⭐ 穩定循環（不會卡手機） */
+/* ⭐ 穩定不卡手機版本 */
 function loop(){
-    const delay = Math.random()*9000 + 7000;
-
     setTimeout(()=>{
-        try{
-            showPopup();
-        }catch(e){
-            console.log("popup error",e);
-        }
+        showPopup();
         loop();
-    }, delay);
+    }, Math.random()*10000 + 7000);
 }
 
-/* 延遲啟動避免卡首屏 */
 setTimeout(loop,4000);
 </script>
 
