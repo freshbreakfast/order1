@@ -324,5 +324,22 @@ function loop(){
 setTimeout(loop,5000);
 </script>
     
+</script>
+let isGoing = false;
+
+function goFami(){
+    if(isGoing) return; // 防止狂點
+    isGoing = true;
+
+    const loading = document.getElementById("loadingFami");
+    loading.style.opacity = "1";
+    loading.style.pointerEvents = "auto";
+
+    setTimeout(()=>{
+        window.location.href = "https://famistore.famiport.com.tw/users/2903801";
+    },300);
+}
+</script>
+
 </body>
 </html>
