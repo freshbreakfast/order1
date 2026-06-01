@@ -118,6 +118,26 @@ img{
     font-weight:bold;
 }
 
+.marquee{
+    overflow:hidden;
+    white-space:nowrap;
+    background:transparent;
+    color:#ffcc00;
+    font-size:12px;
+    margin-top:6px;
+}
+
+.marquee span{
+    display:inline-block;
+    padding-left:100%;
+    animation:marqueeMove 12s linear infinite;
+}
+
+@keyframes marqueeMove{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-100%); }
+}
+    
 .urgency{
     color:#ffcc00;
     font-size:12px;
@@ -178,8 +198,9 @@ z-index:999;
 
 <p class="delivery">門市取貨 / 全家配送・超方便 🚚</p>
 
-<div class="urgency">
-⏰ 今日訂單爆滿中・庫存快速減少！
+<div class="marquee">
+  <span>⏰ 今日訂單爆滿中・庫存快速減少！立即加入LINE官網・享團購優惠價　</span>
+  <span>⏰ 今日訂單爆滿中・庫存快速減少！立即加入LINE官網・享團購優惠價　</span>
 </div>
 
 <img src="./image1.png">
