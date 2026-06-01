@@ -152,6 +152,26 @@ img{
     transform:translateY(0);
 }
 
+<!-- 好賣+ Loading -->
+<div id="loadingFami" style="
+position:fixed;
+bottom:20px;
+right:20px;
+background:#06C755;
+color:#fff;
+padding:12px 16px;
+border-radius:12px;
+font-size:14px;
+box-shadow:0 6px 20px rgba(0,0,0,0.25);
+
+opacity:0;
+pointer-events:none;
+transition:all .3s ease;
+z-index:999;
+">
+🟢 🚚 正在連線好賣+...
+</div>
+    
 /* =========================
    限時搶購動畫
 ========================= */
@@ -280,15 +300,12 @@ img{
 <script>
 const names=["王小姐","陳先生","林小姐","張先生","李小姐"];
 const areas=["新北板橋","新北中和","新北三重","台北信義","新莊","永和"];
-
-/* 🔥 A組權重提高（更像爆單） */
 const products=["A組","A組","A組","A組","B組"];
 
 function r(a){
     return a[Math.floor(Math.random()*a.length)];
 }
 
-/* 🔥 改成更真實時間（不再用秒） */
 function timeText(){
     return Math.floor(Math.random()*15+1)+"分鐘前";
 }
@@ -312,16 +329,34 @@ function showPopup(){
     },2200);
 }
 
-/* ⭐ 更自然節奏（避免太頻繁） */
 function loop(){
     setTimeout(()=>{
         showPopup();
         loop();
-    }, Math.random()*12000 + 8000); // 8~20秒
+    }, Math.random()*12000 + 8000);
 }
 
-/* 延遲啟動（避免一進來就跳） */
 setTimeout(loop,5000);
+
+
+/* ⭐ 好賣+ 按鈕 */
+let isGoing = false;
+
+function goFami(){
+    if(isGoing) return;
+    isGoing = true;
+
+    const loading = document.getElementById("loadingFami");
+
+    if(loading){
+        loading.style.opacity = "1";
+        loading.style.pointerEvents = "auto";
+    }
+
+    setTimeout(()=>{
+        window.location.href = "https://famistore.famiport.com.tw/users/2903801";
+    },300);
+}
 </script>
     
 </script>
