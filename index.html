@@ -14,20 +14,20 @@ body{
     background:#111;
 }
 
-/* 手機優化 */
+/* 手機點擊優化 */
 html, body{
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     overscroll-behavior: none;
 }
 
-a, button{
+a, button, .btn, .lineBtn{
     touch-action: manipulation;
     user-select: none;
 }
 
-button:active{
-    transform: scale(0.97);
+a:active, button:active, .btn:active, .lineBtn:active{
+    transform: scale(0.98);
 }
 
 /* 圖片 */
@@ -38,21 +38,22 @@ img{
     margin:0 auto 10px;
 }
 
-/* 按鈕 */
+/* 主按鈕 */
 .btn{
     display:block;
     width:85%;
     max-width:420px;
-    padding:16px;
+    padding:16px 28px;
     margin:12px auto;
     font-size:18px;
     border-radius:999px;
-    border:none;
+    text-decoration:none;
     font-weight:bold;
+    border:none;
 }
 
 .store{background:#06C755;color:#fff;}
-.online{background:#fff;color:#111;}
+.online{background:#fff;color:#111;border:1px solid #ddd;}
 
 /* LINE */
 .lineBtn{
@@ -69,29 +70,32 @@ img{
     width:78%;
     max-width:360px;
     font-size:17px;
-    padding:16px;
+    padding:16px 20px;
 }
 
 .lineBtn.b{
     width:65%;
     max-width:300px;
     font-size:15px;
-    padding:13px;
+    padding:13px 18px;
 }
 
-/* 彈出通知 */
+/* Popup */
 #popupOrder{
     position:fixed;
     bottom:20px;
     right:20px;
     background:#fff;
     color:#111;
-    padding:10px;
+    padding:10px 14px;
     border-radius:12px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.2);
     font-size:13px;
+
     opacity:0;
     transform:translateY(20px);
-    transition:0.3s;
+    transition:all 0.35s ease;
+
     pointer-events:none;
 }
 
@@ -100,7 +104,7 @@ img{
     transform:translateY(0);
 }
 
-/* loading */
+/* Loading */
 #loadingFami{
     position:fixed;
     top:0;
@@ -117,7 +121,7 @@ img{
 
     opacity:0;
     pointer-events:none;
-    transition:0.25s;
+    transition:opacity 0.25s ease;
 }
 
 .loader{
@@ -127,12 +131,23 @@ img{
     border-top:4px solid #06C755;
     border-radius:50%;
     animation:spin 1s linear infinite;
-    margin-bottom:15px;
+    margin-bottom:16px;
 }
 
 @keyframes spin{
-    0%{transform:rotate(0);}
+    0%{transform:rotate(0deg);}
     100%{transform:rotate(360deg);}
+}
+
+/* 閃爍 */
+.flash{
+    color:#ff3b3b;
+    animation:flashAnim 1s infinite;
+}
+
+@keyframes flashAnim{
+    0%,100%{opacity:1;}
+    50%{opacity:0.3;}
 }
 </style>
 </head>
@@ -140,19 +155,22 @@ img{
 <body>
 
 <div style="background:#000;padding:24px 10px;">
-<h1 style="color:#fff;">🔥 限時搶購<br>早餐食材選品中心</h1>
+<h1 style="margin:0;font-size:22px;color:#fff;">
+<span class="flash">🔥 限時搶購</span><br>
+早餐食材選品中心
+</h1>
 
 <img src="./image1.png">
 <img src="./image4.png">
 <img src="./image5.png">
 
-<p style="color:#fff;">請選擇取貨方式👇</p>
+<p style="color:#fff;font-size:13px;">請選擇取貨方式👇</p>
 
 <a href="https://freshbreakfast.github.io/order-group/" class="btn store">
 🔥 搶購（三重門市取貨）
 </a>
 
-<!-- ⭐ 改這裡：好賣+ -->
+<!-- ⭐ 修正：好賣+ -->
 <button class="btn online" ontouchstart="goFami()" onclick="goFami()">
 🚚 好賣+（全家配送）
 </button>
@@ -160,26 +178,30 @@ img{
 <img src="./image6.png">
 
 <!-- LINE -->
+<div style="margin-top:10px;">
 <div style="color:#ffd700;font-size:12px;">🔥 最多人選這組</div>
 
 <a class="lineBtn a" href="https://line.me/R/oaMessage/@567ncwhd/?訂購A組 $489">
-🔥 A組: $489
+🔥 A組: 開趴炸翻天 $489
 </a>
 
 <a class="lineBtn b" href="https://line.me/R/oaMessage/@567ncwhd/?訂購B組 $509">
-👉 B組: $509
+👉 B組: 輕鬆好料理 $509
 </a>
+</div>
 
 </div>
 
 <!-- Popup -->
-<div id="popupOrder"></div>
+<div id="popupOrder"><div id="popupText"></div></div>
 
-<!-- ⭐ Loading -->
+<!-- Loading -->
 <div id="loadingFami">
-<div class="loader"></div>
-<div>正在連線好賣+…</div>
-<div style="font-size:12px;color:#aaa;">請稍候</div>
+  <div class="loader"></div>
+  <div>正在連線好賣+…</div>
+  <div style="font-size:12px;color:#aaa;margin-top:6px;">
+    請稍候，系統為您開啟訂購頁面
+  </div>
 </div>
 
 <script>
@@ -190,7 +212,7 @@ function goFami(){
     if(isGoing) return;
     isGoing = true;
 
-    let loading = document.getElementById("loadingFami");
+    const loading = document.getElementById("loadingFami");
     loading.style.opacity = "1";
     loading.style.pointerEvents = "auto";
 
@@ -199,34 +221,39 @@ function goFami(){
     },300);
 }
 
-/* 假訂單 */
-const names=["王小姐","陳先生","林小姐","張先生"];
-const areas=["板橋","中和","三重","信義"];
+/* Popup */
+const names=["王小姐","陳先生","林小姐","張先生","李小姐"];
+const areas=["新北板橋","新北中和","新北三重","台北信義"];
 const products=["A組","A組","A組","B組"];
 
+function r(a){
+    return a[Math.floor(Math.random()*a.length)];
+}
+
 function showPopup(){
-    let el=document.getElementById("popupOrder");
-    el.innerHTML=
+    const el=document.getElementById("popupOrder");
+    const text=document.getElementById("popupText");
+
+    text.innerHTML=
     Math.floor(Math.random()*10+1)+"分鐘前<br>"+
-    areas[Math.floor(Math.random()*areas.length)]+"的"+
-    names[Math.floor(Math.random()*names.length)]+"<br>"+
-    "訂購 "+products[Math.floor(Math.random()*products.length)];
+    r(areas)+"的"+r(names)+"<br>"+
+    "訂購了 <b>"+r(products)+"</b>";
 
     el.classList.add("show");
 
     setTimeout(()=>{
         el.classList.remove("show");
-    },2000);
+    },2200);
 }
 
 function loop(){
     setTimeout(()=>{
         showPopup();
         loop();
-    },Math.random()*8000+6000);
+    }, Math.random()*10000 + 7000);
 }
 
-setTimeout(loop,3000);
+setTimeout(loop,4000);
 </script>
 
 </body>
