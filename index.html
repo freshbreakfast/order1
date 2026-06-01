@@ -246,9 +246,9 @@ img{
 🔥 搶購（三重門市取貨）
 </a>
 
-<a href="https://famistore.famiport.com.tw/users/2903801" class="btn online">
+<button class="btn online" ontouchstart="goFami()" onclick="goFami()">
 🚚 好賣+（全家配送）
-</a>
+</button>
 
 <img src="./image6.png">    
     
@@ -279,17 +279,18 @@ img{
 
 <script>
 const names=["王小姐","陳先生","林小姐","張先生","李小姐"];
-const areas=["新北板橋","新北中和","新北三重","台北信義"];
-const products=["A組","A組","A組","B組"];
+const areas=["新北板橋","新北中和","新北三重","台北信義","新莊","永和"];
+
+/* 🔥 A組權重提高（更像爆單） */
+const products=["A組","A組","A組","A組","B組"];
 
 function r(a){
     return a[Math.floor(Math.random()*a.length)];
 }
 
+/* 🔥 改成更真實時間（不再用秒） */
 function timeText(){
-    return Math.random()<0.6 ?
-    Math.floor(Math.random()*40+10)+"秒前" :
-    Math.floor(Math.random()*5+1)+"分鐘前";
+    return Math.floor(Math.random()*15+1)+"分鐘前";
 }
 
 function showPopup(){
@@ -311,16 +312,17 @@ function showPopup(){
     },2200);
 }
 
-/* ⭐ 穩定不卡手機版本 */
+/* ⭐ 更自然節奏（避免太頻繁） */
 function loop(){
     setTimeout(()=>{
         showPopup();
         loop();
-    }, Math.random()*10000 + 7000);
+    }, Math.random()*12000 + 8000); // 8~20秒
 }
 
-setTimeout(loop,4000);
+/* 延遲啟動（避免一進來就跳） */
+setTimeout(loop,5000);
 </script>
-
+    
 </body>
 </html>
