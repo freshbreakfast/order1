@@ -15,7 +15,7 @@ body{
 }
 
 /* =========================
-   ⭐ 手機點擊優化
+    ⭐ 手機點擊優化
 ========================= */
 html, body{
     touch-action: manipulation;
@@ -30,7 +30,7 @@ a, button, .btn, .lineBtn{
 }
 
 a:active, button:active, .btn:active, .lineBtn:active{
-    transform: scale(0.98);
+    transform: scale(0.96); /* 稍微加大縮放感，體感更好 */
     transition: transform 0.05s ease;
 }
 
@@ -42,7 +42,7 @@ img{
 }
 
 /* =========================
-   按鈕
+    按鈕
 ========================= */
 .btn{
     display:block;
@@ -54,6 +54,9 @@ img{
     border-radius:999px;
     text-decoration:none;
     font-weight:bold;
+    box-sizing: border-box; /* 防止 padding 撐開寬度 */
+    border: none;
+    cursor: pointer;
 }
 
 .store{background:#06C755;color:#fff;}
@@ -62,12 +65,12 @@ img{
 /* LINE */
 .lineBtn{
     display:block;
-    margin:10px auto;
+    margin:12px auto;
     border-radius:999px;
     text-decoration:none;
     font-weight:bold;
     color:#fff;
-    background:#06C755;
+    box-sizing: border-box;
 }
 
 .lineBtn.a{
@@ -76,6 +79,7 @@ img{
     font-size:17px;
     padding:16px 20px;
     background:linear-gradient(45deg,#06C755,#00e676);
+    box-shadow: 0 4px 15px rgba(6, 199, 85, 0.4);
 }
 
 .lineBtn.b{
@@ -83,18 +87,20 @@ img{
     max-width:300px;
     font-size:15px;
     padding:13px 18px;
+    background:#06C755;
 }
 
 /* =========================
-   套組
+    套組與特效
 ========================= */
 .bundle{
     background:#fff;
     color:#111;
-    padding:20px 15px 10px;
+    padding:20px 15px;
     max-width:600px;
-    margin:0 auto;
+    margin:20px auto 10px;
     border-radius:12px;
+    box-sizing: border-box;
 }
 
 .flash{
@@ -104,11 +110,11 @@ img{
 
 @keyframes flashAnim{
     0%,100%{opacity:1;}
-    50%{opacity:0.3;}
+    50%{opacity:0.4;}
 }
 
 .delivery{
-    margin:8px 0 0;
+    margin:8px 0 12px;
     font-size:13px;
     color:#000;
     background:linear-gradient(90deg,#ffd700,#ffcc00);
@@ -118,32 +124,30 @@ img{
     font-weight:bold;
 }
 
-.marquee{
-    overflow:hidden;
-    white-space:nowrap;
-    background:transparent;
-    color:#ffcc00;
-    font-size:12px;
-    margin-top:6px;
+/* 跑馬燈優化：改為現代無縫滾動 */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    background: transparent;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 15px;
 }
 
-.marquee span{
-    display:inline-block;
-    padding-left:100%;
-    animation:marqueeMove 12s linear infinite;
+.marquee {
+    display: inline-block;
+    animation: marqueeMove 15s linear infinite;
+}
+
+.marquee span {
+    font-size: 13px;
+    color: #ffcc00;
+    padding-right: 50px; /* 文字間距 */
 }
 
 @keyframes marqueeMove{
-    0%{ transform:translateX(0); }
-    100%{ transform:translateX(-100%); }
-}
-    
-.urgency{
-    color:#ffcc00;
-    font-size:12px;
-    margin-top:6px;
-    overflow:hidden;
-    white-space:nowrap;
+    0%{ transform: translateX(0); }
+    100%{ transform: translateX(-50%); }
 }
 
 /* popup */
@@ -151,17 +155,19 @@ img{
     position:fixed;
     bottom:20px;
     right:20px;
-    background:#fff;
+    background:rgba(255, 255, 255, 0.95);
     color:#111;
-    padding:10px 14px;
+    padding:12px 16px;
     border-radius:12px;
     font-size:13px;
-    max-width:220px;
+    width: 200px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     opacity:0;
     transform:translateY(20px);
     transition:all 0.35s ease;
     pointer-events:none;
     z-index:999;
+    text-align: left; /* 靠左對齊彈窗文字，視覺更像系統通知 */
 }
 
 #popupOrder.show{
@@ -171,19 +177,19 @@ img{
 
 /* loading */
 #loadingFami{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#06C755;
-color:#fff;
-padding:12px 16px;
-border-radius:12px;
-font-size:14px;
-box-shadow:0 6px 20px rgba(0,0,0,0.25);
-opacity:0;
-pointer-events:none;
-transition:all .3s ease;
-z-index:999;
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#06C755;
+    color:#fff;
+    padding:12px 16px;
+    border-radius:12px;
+    font-size:14px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.25);
+    opacity:0;
+    pointer-events:none;
+    transition:all .3s ease;
+    z-index:999;
 }
 </style>
 </head>
@@ -191,60 +197,59 @@ z-index:999;
 <body>
 
 <div style="background:#000;padding:24px 10px;">
-<h1 style="margin:0;font-size:22px;color:#fff;">
-<span class="flash">🔥 限時搶購</span><br>
-早餐食材選品中心
-</h1>
+    <h1 style="margin:0;font-size:22px;color:#fff;line-height:1.4;">
+        <span class="flash">🔥 限時搶購</span><br>
+        早餐食材選品中心
+    </h1>
 
-<p class="delivery">門市取貨 / 全家配送・超方便 🚚</p>
+    <p class="delivery">門市取貨 / 全家配送・超方便 🚚</p>
 
-<div class="marquee">
-  <span>⏰ 今日訂單爆滿中・庫存快速減少！立即加入LINE官網・享團購優惠價　</span>
-  <span>⏰ 今日訂單爆滿中・庫存快速減少！立即加入LINE官網・享團購優惠價　</span>
+    <div class="marquee-container">
+        <div class="marquee">
+            <span>⏰ 今日訂單爆滿中・庫存快速減少！立即加入LINE官網・享團購優惠價</span>
+            <span>⏰ 今日訂單爆滿中・庫存快速減少！立即加入LINE官網・享團購優惠價</span>
+        </div>
+    </div>
+
+    <img src="./image1.png" alt="產品圖1">
+    <img src="./image4.png" alt="產品圖2">
+    <img src="./image5.png" alt="產品圖3">
+
+    <p style="color:#fff;font-size:14px;margin:20px 0 10px;">請選擇取貨方式👇</p>
+
+    <a href="https://freshbreakfast.github.io/order-group/" class="btn store">
+        🔥 搶購（三重門市取貨）
+    </a>
+
+    <button class="btn online" onclick="goFami()">
+        🚚 好賣+（全家配送）
+    </button>
+
+    <img src="./image6.png" alt="產品圖4">
+
+    <div class="bundle">
+        <h2 style="font-size:18px;margin:0;">🎁 套組 &lt;特價&gt; 訂購</h2>
+    </div>
+
+    <div style="margin-top:10px;">
+        <a class="lineBtn a" href="https://line.me/R/oaMessage/@567ncwhd/?訂購A組特價%20$489%0A炸物拼盤x1、雞塊x1%0A薯條x1%0A（請輸入您的姓名與電話）">
+            🔥 A組 開趴炸翻天 $489
+        </a>
+
+        <a class="lineBtn b" href="https://line.me/R/oaMessage/@567ncwhd/?訂購B組特價%20$509%0A煎餃x1、三星蔥餅x1%0A紐澳良雞腿x1%0A蘑菇鐵板麵x2">
+            👉 B組 輕鬆好料理 $509
+        </a>
+    </div>
 </div>
 
-<img src="./image1.png">
-<img src="./image4.png">
-<img src="./image5.png">
-
-<p style="color:#fff;font-size:13px;">請選擇取貨方式👇</p>
-
-<a href="https://freshbreakfast.github.io/order-group/" class="btn store">
-🔥 搶購（三重門市取貨）
-</a>
-
-<button class="btn online" onclick="goFami()">
-🚚 好賣+（全家配送）
-</button>
-
-<img src="./image6.png">
-
-<div class="bundle">
-<h2 style="font-size:18px;margin:6px 0;">🎁 套組<特價>訂購</h2>
-</div>
-
-<div style="margin-top:10px;">
-<a class="lineBtn a" href="https://line.me/R/oaMessage/@567ncwhd/?訂購B組特價%20$509%0A煎餃x1、三星蔥餅x1%0A紐澳良雞腿x1%0A蘑菇鐵板麵x2">
-🔥 A組 開趴炸翻天 $489
-</a>
-
-<a class="lineBtn b" href="https://line.me/R/oaMessage/@567ncwhd/?訂購B組特價%20$509%0A煎餃x1、三星蔥餅x1%0A紐澳良雞腿x1%0A蘑菇鐵板麵x2">
-👉 B組 輕鬆好料理 $509
-</a>
-</div>
-
-</div>
-
-<!-- popup -->
 <div id="popupOrder"><div id="popupText"></div></div>
 
-<!-- loading -->
 <div id="loadingFami">🟢 🚚 正在連線好賣+...</div>
 
 <script>
-const names=["王小姐","陳先生","林小姐","張先生","李小姐"];
-const areas=["新北板橋","新北中和","新北三重","台北信義","新莊","永和"];
-const products=["A組","A組","A組","A組","B組"];
+const names=["王小姐","陳先生","林小姐","張先生","李小姐","劉先生","黃小姐"];
+const areas=["新北板橋","新北中和","新北三重","台北信義","新莊區","永和區"];
+const products=["A組 開趴炸翻天","A組 開趴炸翻天","B組 輕鬆好料理"];
 
 function r(a){return a[Math.floor(Math.random()*a.length)]}
 function timeText(){return Math.floor(Math.random()*15+1)+"分鐘前"}
@@ -253,23 +258,23 @@ function showPopup(){
     const el=document.getElementById("popupOrder");
     const text=document.getElementById("popupText");
 
-    text.innerHTML = `${timeText()}<br>${r(areas)}的${r(names)}<br>訂購了 <b>${r(products)}</b>`;
+    // 加上時間小字優化視覺效果
+    text.innerHTML = `<span style="color:#888;font-size:11px;">${timeText()}</span><br><b>${r(areas)}</b> 的 <b>${r(names)}</b><br>已搶購了 <span style="color:#ff3b3b;">${r(products)}</span>`;
 
     el.classList.add("show");
-    setTimeout(()=>el.classList.remove("show"),2200);
+    setTimeout(()=>el.classList.remove("show"),2500); // 稍微延長停留時間至 2.5 秒
 }
 
 function loop(){
     setTimeout(()=>{
         showPopup();
         loop();
-    },Math.random()*12000+8000);
+    },Math.random()*8000+6000); /* 縮短間隔（6~14秒出現一次），製造更熱銷的緊迫感 */
 }
-setTimeout(loop,5000);
+setTimeout(loop,3000);
 
-/* 好賣+ */
+/* 好賣+ 導頁 */
 let isGoing=false;
-
 function goFami(){
     if(isGoing) return;
     isGoing=true;
@@ -280,7 +285,7 @@ function goFami(){
 
     setTimeout(()=>{
         window.location.href="https://famistore.famiport.com.tw/users/2903801";
-    },300);
+    },800); // 稍微延長到 0.8 秒，讓使用者看清「正在連線」的提示，提升信任感
 }
 </script>
 
