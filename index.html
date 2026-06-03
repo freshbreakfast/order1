@@ -177,6 +177,7 @@ img{
     opacity:0;
     pointer-events:none;
     z-index:999;
+    transition: opacity 0.3s ease;
 }
 </style>
 </head>
@@ -248,7 +249,7 @@ function showPopup(){
     const el = document.getElementById("popupOrder");
     const text = document.getElementById("popupText");
     
-    if(!el || !text) return; // 安全機制防出錯
+    if(!el || !text) return; 
     
     const item = r(reviews);
 
@@ -261,38 +262,47 @@ function showPopup(){
     `;
 
     el.classList.add("show");
+    
+    // 4.5 秒後自動隱藏
     setTimeout(() => {
         el.classList.remove("show");
-    }, 4500); // 停留時間改為 4.5 秒，方便閱讀
+    }, 4500); 
 }
 
-// 循環計時器優化
-function loop(){
-    setTimeout(() => {
+// 修正後的循環計時器（避免遞迴堆疊導致記憶體洩漏）
+function startMarqueePopup() {
+    // 1.5 秒後立刻跳出第一則
+    setTimeout(showPopup, 1500);
+    
+    // 之後每 12~16 秒隨機輪播一次
+    setInterval(() => {
         showPopup();
-        loop();
-    }, Math.random() * 6000 + 10000); // 每 10～16 秒輪播一次
+    }, Math.random() * 4000 + 12000);
 }
 
-// ⭐ 加速觸發：進網頁 1.5 秒立刻跳出第一則好評！
-setTimeout(() => {
-    showPopup();
-    loop();
-}, 1500);
+// 啟動好評彈窗
+startMarqueePopup();
 
 /* 好賣+ 導頁 */
-let isGoing=false;
+let isGoing = false;
 function goFami(){
     if(isGoing) return;
-    isGoing=true;
+    isGoing = true;
 
-    const loading=document.getElementById("loadingFami");
-    loading.style.opacity="1";
-    loading.style.pointerEvents="auto";
+    const loading = document.getElementById("loadingFami");
+    loading.style.opacity = "1";
+    loading.style.pointerEvents = "auto";
 
-    setTimeout(()=>{
-        window.location.href="https://famistore.famiport.com.tw/users/2903801";
-    },800);
+    setTimeout(() => {
+        window.location.href = "https://famistore.famiport.com.tw/users/2903801";
+        
+        // 額外保險：1.5秒後若使用者按「上一頁」返回，重設按鈕狀態
+        setTimeout(() => {
+            isGoing = false;
+            loading.style.opacity = "0";
+            loading.style.pointerEvents = "none";
+        }, 1500);
+    }, 800);
 }
 </script>
 
