@@ -8,176 +8,173 @@
 
 <style>
 body{
-    margin:0;
-    text-align:center;
-    font-family:sans-serif;
-    background:#111;
+    margin:0;
+    text-align:center;
+    font-family:sans-serif;
+    background:#111;
 }
 
 /* =========================
-    ⭐ 手機點擊優化
+    ⭐ 手機點擊優化
 ========================= */
 html, body{
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    overscroll-behavior: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
 }
 
 a, button, .btn{
-    touch-action: manipulation;
-    -webkit-user-select: none;
-    user-select: none;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 a:active, button:active, .btn:active{
-    transform: scale(0.96);
-    transition: transform 0.05s ease;
+    transform: scale(0.96);
+    transition: transform 0.05s ease;
 }
 
 img{
-    width:100%;
-    max-width:600px;
-    display:block;
-    margin:0 auto 10px;
+    width:100%;
+    max-width:600px;
+    display:block;
+    margin:0 auto 10px;
 }
 
 /* =========================
-    按鈕樣式
+    按鈕樣式
 ========================= */
 .btn{
-    display:block;
-    width:85%;
-    max-width:420px;
-    padding:16px 20px; 
-    margin:12px auto;
-    font-size:18px;
-    border-radius:999px;
-    text-decoration:none;
-    font-weight:bold;
-    box-sizing: border-box;
-    border: none;
-    cursor: pointer;
-    white-space: nowrap; 
-    line-height: 1.2;    
+    display:block;
+    width:85%;
+    max-width:420px;
+    padding:16px 20px; 
+    margin:12px auto;
+    font-size:18px;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:bold;
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap; 
+    line-height: 1.2;    
 }
 
 .store{
-    background:#06C755;
-    color:#fff;
-    font-size: 17px; 
+    background:#06C755;
+    color:#fff;
+    font-size: 17px; 
 }
 
 .online{background:#fff;color:#111;border:1px solid #ddd;}
 
 /* LINE 專用按鈕（A、B組高度絕對同步） */
 .lineBtn-a{
-    background:linear-gradient(45deg,#06C755,#00e676);
-    color:#fff;
+    background:linear-gradient(45deg,#06C755,#00e676);
+    color:#fff;
 }
 
 .lineBtn-b{
-    background:#06C755;
-    color:#fff;
+    background:#06C755;
+    color:#fff;
 }
 
 /* =========================
-    套組標題與特效
+    套組標題與特效
 ========================= */
 .bundle-title {
-    color: #ffcc00; 
-    font-size: 20px;
-    margin: 25px 0 15px;
-    font-weight: bold;
+    color: #ffcc00; 
+    font-size: 20px;
+    margin: 25px 0 15px;
+    font-weight: bold;
 }
 
 .flash{
-    color:#ff3b3b;
-    animation:flashAnim 1s infinite;
+    color:#ff3b3b;
+    animation:flashAnim 1s infinite;
 }
 
 @keyframes flashAnim{
-    0%,100%{opacity:1;}
-    50%{opacity:0.4;}
+    0%,100%{opacity:1;}
+    50%{opacity:0.4;}
 }
 
 .delivery{
-    margin:8px 0 12px;
-    font-size:13px;
-    color:#000;
-    background:linear-gradient(90deg,#ffd700,#ffcc00);
-    display:inline-block;
-    padding:6px 14px;
-    border-radius:20px;
-    font-weight:bold;
+    margin:8px 0 12px;
+    font-size:13px;
+    color:#000;
+    background:linear-gradient(90deg,#ffd700,#ffcc00);
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:20px;
+    font-weight:bold;
 }
 
 /* 跑馬燈 */
 .marquee-container {
-    overflow: hidden;
-    white-space: nowrap;
-    background: transparent;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    background: transparent;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 15px;
 }
 
 .marquee {
-    display: inline-block;
-    animation: marqueeMove 15s linear infinite;
+    display: inline-block;
+    animation: marqueeMove 15s linear infinite;
 }
 
 .marquee span {
-    font-size: 13px;
-    color: #ffcc00;
-    padding-right: 50px;
+    font-size: 13px;
+    color: #ffcc00;
+    padding-right: 50px;
 }
 
 @keyframes marqueeMove{
-    0%{ transform: translateX(0); }
-    100%{ transform: translateX(-50%); }
+    0%{ transform: translateX(0); }
+    100%{ transform: translateX(-50%); }
 }
 
-/* ⭐ 好評彈窗修正：移出主 div，獨立最外層，絕不擋點擊 */
+/* ⭐ 好評彈窗修正：移出主 div，移至 B組 bar 下面，並刪除最前面的好評 */
 #popupOrder{
-    position:fixed;
-    bottom:20px;
-    right:15px;
-    background:rgba(255, 255, 255, 0.98);
-    color:#111;
-    padding:12px 14px;
-    border-radius:12px;
-    font-size:12px;
-    width: 200px; 
-    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-    opacity:0;
-    transform:translateY(15px);
-    transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    pointer-events:none; /* 關鍵：手指點擊直接穿透它，不卡死 A、B組大 Bar */
-    z-index:99999; /* 最高圖層，確保在黑底網頁上絕對看得見 */
-    text-align: left;
-    border-left: 5px solid #ff9800; 
+    position: relative; /* 移出 fixed，改為相對定位 */
+    width: 90%; /* 與按鈕組對齊 */
+    max-width: 420px;
+    background:rgba(255, 255, 255, 0.98);
+    color:#111;
+    padding:12px 14px;
+    border-radius:12px;
+    font-size:12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    opacity:0; /* 默認隱藏 */
+    transition: opacity 0.4s ease; /* 僅保留不透明度動畫 */
+    z-index: 10; /* 高於背景，低於 fixed 的 loading */
+    text-align: left;
+    border-left: 5px solid #ff9800; 
+    margin: 15px auto; /* 居中並留出邊距 */
+    pointer-events:none; /* 依然穿透 */
 }
 
 #popupOrder.show{
-    opacity:1;
-    transform:translateY(0);
+    opacity:1; /* 顯示 */
 }
 
 /* loading */
 #loadingFami{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#06C755;
-    color:#fff;
-    padding:12px 16px;
-    border-radius:12px;
-    font-size:14px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.25);
-    opacity:0;
-    pointer-events:none;
-    z-index:999;
-    transition: opacity 0.3s ease;
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#06C755;
+    color:#fff;
+    padding:12px 16px;
+    border-radius:12px;
+    font-size:14px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.25);
+    opacity:0;
+    pointer-events:none;
+    z-index:999;
 }
 </style>
 </head>
@@ -186,95 +183,92 @@ img{
 
 <div style="background:#000; padding:24px 10px 20px;">
 
-    <h1 style="margin:0 0 15px; font-size:22px; color:#fff; line-height:1.4;">
-        早餐食材選品中心<br>
-        <span class="flash">🔥 限時搶購</span>
-    </h1>
+    <h1 style="margin:0 0 15px; font-size:22px; color:#fff; line-height:1.4;">
+        早餐食材選品中心<br>
+        <span class="flash">🔥 限時搶購</span>
+    </h1>
 
-    <p class="delivery">門市取貨 / 全家配送・超方便 🚚</p>
+    <p class="delivery">門市取貨 / 全家配送・超方便 🚚</p>
 
-    <div class="marquee-container">
-        <div class="marquee">
-            <span>⏰ 今日訂單爆滿中・庫存快速減少！立即加入LINE官網・享團購優惠價</span>
-            <span>⏰ 今日訂單爆滿中・庫存快速減少！立即加入LINE官網・享團購優惠價</span>
-        </div>
-    </div>
+    <div class="marquee-container">
+        <div class="marquee">
+            <span>⏰ 今日訂單爆滿中・庫存快速減少！立即加入LINE官網・享團購優惠價</span>
+            <span>⏰ 今日訂單爆滿中・庫存快速減少！立即加入LINE官網・享團購優惠價</span>
+        </div>
+    </div>
 
-    <img src="./image1.png" alt="產品圖1">
-    <img src="./image4.png" alt="產品圖2">
-    <img src="./image5.png" alt="產品圖3">
+    <img src="./image1.png" alt="產品圖1">
+    <img src="./image4.png" alt="產品圖2">
+    <img src="./image5.png" alt="產品圖3">
 
-    <p style="color:#fff;font-size:14px;margin:20px 0 10px;">請選擇取貨方式👇</p>
+    <p style="color:#fff;font-size:14px;margin:20px 0 10px;">請選擇取貨方式👇</p>
 
-    <a href="https://freshbreakfast.github.io/order-group/" class="btn store">
-        🔥 搶購（三重門市取貨）
-    </a>
+    <a href="https://freshbreakfast.github.io/order-group/" class="btn store">
+        🔥 搶購（三重門市取貨）
+    </a>
 
-    <button class="btn online" onclick="goFami()">
-        🚚 好賣+（全家配送）
-    </button>
+    <button class="btn online" onclick="goFami()">
+        🚚 好賣+（全家配送）
+    </button>
 
-    <img src="./image6.png" alt="產品圖4">
+    <img src="./image6.png" alt="產品圖4">
 
-    <div class="bundle-title">🎁 套組 &lt;特價&gt; 訂購</div>
+    <div class="bundle-title">🎁 套組 &lt;特價&gt; 訂購</div>
 
-    <div style="margin-top:10px;">
-        <a class="btn lineBtn-a" href="https://line.me/R/oaMessage/@567ncwhd/?訂購A組特價%20$489%0A炸物拼盤x1、雞塊x1%0A薯條x1%0A（請輸入您的姓名與電話）">
-            🔥 A組 開趴炸翻天 $489
-        </a>
+    <div style="margin-top:10px;">
+        <a class="btn lineBtn-a" href="https://line.me/R/oaMessage/@567ncwhd/?訂購A組特價%20$489%0A炸物拼盤x1、雞塊x1%0A薯條x1%0A（請輸入您的姓名與電話）">
+            🔥 A組 開趴炸翻天 $489
+        </a>
 
-        <a class="btn lineBtn-b" href="https://line.me/R/oaMessage/@567ncwhd/?訂購B組特價%20$509%0A煎餃x1、三星蔥餅x1%0A紐澳良雞腿x1%0A蘑菇鐵板麵x2">
-            👉 B組 輕鬆好料理 $509
-        </a>
-    </div>
+        <a class="btn lineBtn-b" href="https://line.me/R/oaMessage/@567ncwhd/?訂購B組特價%20$509%0A煎餃x1、三星蔥餅x1%0A紐澳良雞腿x1%0A蘑菇鐵板麵x2">
+            👉 B組 輕鬆好料理 $509
+        </a>
+    </div>
+
+        <div id="popupOrder"><div id="popupText"></div></div>
 </div>
-
-<div id="popupOrder"><div id="popupText"></div></div>
 
 <div id="loadingFami">🟢 🚚 正在連線好賣+...</div>
 
 <script>
-// 真實好評內容庫
+// 真實好評內容庫（刪除最前面的陳媽媽）
 const reviews = [
-    { name: "三重陳媽媽", tag: "門市自取", text: "煎餃和鐵板麵小孩子超愛！下課煎一下當點心超方便，已經回購三次了。" },
-    { name: "板橋林先生", tag: "全家配送", text: "雞腿排肉質很厚實，用氣炸鍋弄一下就很多汁，配三星蔥餅當早餐很完美！" },
-    { name: "中和張小姐", tag: "忠實老客", text: "A組的炸物拼盤份量很有誠意！週末在家跟家人開趴烤來吃，大家都說讚。" },
-    { name: "新莊李小姐", tag: "網友強力推薦", text: "三重門市自取很快，老闆服務很親切！食材新鮮，放冷凍庫隨時煮都很方便。" },
-    { name: "蘆洲黃先生", tag: "全家配送", text: "鐵板麵的醬汁味道很夠，跟早餐店賣的一模一樣！不用早起排隊就能吃到。" }
+    { name: "板橋林先生", tag: "全家配送", text: "雞腿排肉質很厚實，用氣炸鍋弄一下就很多汁，配三星蔥餅當早餐很完美！" },
+    { name: "中和張小姐", tag: "忠實老客", text: "A組的炸物拼盤份量很有誠意！週末在家跟家人開趴烤來吃，大家都說讚。" },
+    { name: "新莊李小姐", tag: "網友強力推薦", text: "三重門市自取很快，老闆服務很親切！食材新鮮，放冷凍庫隨時煮都很方便。" },
+    { name: "蘆洲黃先生", tag: "全家配送", text: "鐵板麵的醬汁味道很夠，跟早餐店賣的一模一樣！不用早起排隊就能吃到。" }
 ];
 
 function r(a){return a[Math.floor(Math.random()*a.length)]}
 
 function showPopup(){
-    const el = document.getElementById("popupOrder");
-    const text = document.getElementById("popupText");
-    
-    if(!el || !text) return; 
-    
-    const item = r(reviews);
+    const el = document.getElementById("popupOrder");
+    const text = document.getElementById("popupText");
+    
+    if(!el || !text) return; // 安全機制防出錯
+    
+    const item = r(reviews);
 
-    text.innerHTML = `
-        <div style="margin-bottom:3px;">
-            <span style="color:#ff9800; font-weight:bold; font-size:12px;">⭐⭐⭐⭐⭐ 好評分享</span>
-        </div>
-        <span style="color:#666; font-size:10px;">👤 ${item.name} ｜ <span style="background:#e8f5e9; color:#2e7d32; padding:0px 4px; border-radius:3px; font-size:9px;">${item.tag}</span></span>
-        <p style="margin:5px 0 0; color:#222; font-weight:500; line-height:1.3; font-size:11px;">"${item.text}"</p>
-    `;
+    text.innerHTML = `
+        <div style="margin-bottom:3px;">
+            <span style="color:#ff9800; font-weight:bold; font-size:12px;">⭐⭐⭐⭐⭐ 好評分享</span>
+        </div>
+        <span style="color:#666; font-size:10px;">👤 ${item.name} ｜ <span style="background:#e8f5e9; color:#2e7d32; padding:0px 4px; border-radius:3px; font-size:9px;">${item.tag}</span></span>
+        <p style="margin:5px 0 0; color:#222; font-weight:500; line-height:1.3; font-size:11px;">"${item.text}"</p>
+    `;
 
-    el.classList.add("show");
-    
-    // 4.5 秒後自動隱藏
-    setTimeout(() => {
-        el.classList.remove("show");
-    }, 4500); 
+    el.classList.add("show");
+    setTimeout(() => {
+        el.classList.remove("show");
+    }, 4500); // 停留時間改為 4.5 秒，方便閱讀
 }
 
 // 修正後的循環計時器（避免遞迴堆疊導致記憶體洩漏）
 function startMarqueePopup() {
-    // 1.5 秒後立刻跳出第一則
+    // 1. 進網頁 1.5 秒立刻跳出第一則好評
     setTimeout(showPopup, 1500);
     
-    // 之後每 12~16 秒隨機輪播一次
+    // 2. 之後每 12~16 秒「乖乖排隊」隨機輪播一次，絕不重複疊加
     setInterval(() => {
         showPopup();
     }, Math.random() * 4000 + 12000);
@@ -284,17 +278,17 @@ function startMarqueePopup() {
 startMarqueePopup();
 
 /* 好賣+ 導頁 */
-let isGoing = false;
+let isGoing=false;
 function goFami(){
-    if(isGoing) return;
-    isGoing = true;
+    if(isGoing) return;
+    isGoing=true;
 
-    const loading = document.getElementById("loadingFami");
-    loading.style.opacity = "1";
-    loading.style.pointerEvents = "auto";
+    const loading=document.getElementById("loadingFami");
+    loading.style.opacity="1";
+    loading.style.pointerEvents="auto";
 
-    setTimeout(() => {
-        window.location.href = "https://famistore.famiport.com.tw/users/2903801";
+    setTimeout(()=>{
+        window.location.href="https://famistore.famiport.com.tw/users/2903801";
         
         // 額外保險：1.5秒後若使用者按「上一頁」返回，重設按鈕狀態
         setTimeout(() => {
@@ -302,7 +296,7 @@ function goFami(){
             loading.style.opacity = "0";
             loading.style.pointerEvents = "none";
         }, 1500);
-    }, 800);
+    },800);
 }
 </script>
 
