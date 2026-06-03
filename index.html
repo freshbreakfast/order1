@@ -69,7 +69,7 @@ img{
 
 .online{background:#fff;color:#111;border:1px solid #ddd;}
 
-/* ⭐ LINE 專用按鈕（A、B組結構與高度完全對齊） */
+/* LINE 專用按鈕（A、B組高度絕對同步） */
 .lineBtn-a{
     background:linear-gradient(45deg,#06C755,#00e676);
     color:#fff;
@@ -137,25 +137,25 @@ img{
     100%{ transform: translateX(-50%); }
 }
 
-/* ⭐ popup 好評彈窗優化（移至右下角並調整層級，絕不遮擋按鈕） */
+/* ⭐ 好評彈窗修正：移出主 div，獨立最外層，絕不擋點擊 */
 #popupOrder{
     position:fixed;
-    bottom:15px;
+    bottom:20px;
     right:15px;
-    background:rgba(255, 255, 255, 0.96);
+    background:rgba(255, 255, 255, 0.98);
     color:#111;
-    padding:10px 14px;
+    padding:12px 14px;
     border-radius:12px;
     font-size:12px;
-    width: 190px; /* 稍微縮小寬度，避免往外撐到中間的按鈕 */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    width: 200px; 
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     opacity:0;
-    transform:translateY(10px);
-    transition:all 0.35s ease;
-    pointer-events:none; /* ⭐ 關鍵：允許手指穿透點擊，就算疊到也點得到按鈕 */
-    z-index:99; /* 層級低於主按鈕區，確保不擋點擊 */
+    transform:translateY(15px);
+    transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events:none; /* 關鍵：手指點擊直接穿透它，不卡死 A、B組大 Bar */
+    z-index:99999; /* 最高圖層，確保在黑底網頁上絕對看得見 */
     text-align: left;
-    border-left: 4px solid #ffcc00; 
+    border-left: 5px solid #ff9800; 
 }
 
 #popupOrder.show{
@@ -183,7 +183,7 @@ img{
 
 <body>
 
-<div style="background:#000;padding:24px 10px 20px; position:relative; z-index:100;">
+<div style="background:#000; padding:24px 10px 20px;">
 
     <h1 style="margin:0 0 15px; font-size:22px; color:#fff; line-height:1.4;">
         早餐食材選品中心<br>
@@ -217,7 +217,7 @@ img{
 
     <div class="bundle-title">🎁 套組 &lt;特價&gt; 訂購</div>
 
-    <div style="margin-top:10px; position:relative; z-index:101;">
+    <div style="margin-top:10px;">
         <a class="btn lineBtn-a" href="https://line.me/R/oaMessage/@567ncwhd/?訂購A組特價%20$489%0A炸物拼盤x1、雞塊x1%0A薯條x1%0A（請輸入您的姓名與電話）">
             🔥 A組 開趴炸翻天 $489
         </a>
@@ -233,6 +233,7 @@ img{
 <div id="loadingFami">🟢 🚚 正在連線好賣+...</div>
 
 <script>
+// 真實好評內容庫
 const reviews = [
     { name: "三重陳媽媽", tag: "門市自取", text: "煎餃和鐵板麵小孩子超愛！下課煎一下當點心超方便，已經回購三次了。" },
     { name: "板橋林先生", tag: "全家配送", text: "雞腿排肉質很厚實，用氣炸鍋弄一下就很多汁，配三星蔥餅當早餐很完美！" },
@@ -244,32 +245,42 @@ const reviews = [
 function r(a){return a[Math.floor(Math.random()*a.length)]}
 
 function showPopup(){
-    const el=document.getElementById("popupOrder");
-    const text=document.getElementById("popupText");
+    const el = document.getElementById("popupOrder");
+    const text = document.getElementById("popupText");
+    
+    if(!el || !text) return; // 安全機制防出錯
     
     const item = r(reviews);
 
     text.innerHTML = `
         <div style="margin-bottom:3px;">
-            <span style="color:#ff9800; font-weight:bold; font-size:11px;">⭐⭐⭐⭐⭐ 好評分享</span>
+            <span style="color:#ff9800; font-weight:bold; font-size:12px;">⭐⭐⭐⭐⭐ 好評分享</span>
         </div>
         <span style="color:#666; font-size:10px;">👤 ${item.name} ｜ <span style="background:#e8f5e9; color:#2e7d32; padding:0px 4px; border-radius:3px; font-size:9px;">${item.tag}</span></span>
-        <p style="margin:4px 0 0; color:#222; font-weight:500; line-height:1.3; font-size:11px;">"${item.text}"</p>
+        <p style="margin:5px 0 0; color:#222; font-weight:500; line-height:1.3; font-size:11px;">"${item.text}"</p>
     `;
 
     el.classList.add("show");
-    setTimeout(()=>el.classList.remove("show"),4000); 
+    setTimeout(() => {
+        el.classList.remove("show");
+    }, 4500); // 停留時間改為 4.5 秒，方便閱讀
 }
 
+// 循環計時器優化
 function loop(){
-    setTimeout(()=>{
+    setTimeout(() => {
         showPopup();
         loop();
-    }, Math.random()*8000 + 10000); 
+    }, Math.random() * 6000 + 10000); // 每 10～16 秒輪播一次
 }
-setTimeout(loop,4000); 
 
-/* 好賣+ */
+// ⭐ 加速觸發：進網頁 1.5 秒立刻跳出第一則好評！
+setTimeout(() => {
+    showPopup();
+    loop();
+}, 1500);
+
+/* 好賣+ 導頁 */
 let isGoing=false;
 function goFami(){
     if(isGoing) return;
